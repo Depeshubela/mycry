@@ -107,7 +107,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # }
 DATABASES = {
     'default': {
-        'ENGINE': "django_prometheus.db.backends.postgresql",
+        'ENGINE': "django.db.backends.postgresql",
         'NAME': "mycry",
         'USER': "postgres",
         'PASSWORD': "joy50923",
@@ -297,4 +297,5 @@ SIMPLEUI_INDEX = '#'
 # -----------------------------------------------------------------
 
 #PROMETHEUS
-PROMETHEUS_EXPORT_MIGRATIONS = env.bool("PROMETHEUS_EXPORT_MIGRATIONS", True)
+# PROMETHEUS_EXPORT_MIGRATIONS = env.bool("PROMETHEUS_EXPORT_MIGRATIONS", True)
+PROMETHEUS_EXPORT_MIGRATIONS = False
