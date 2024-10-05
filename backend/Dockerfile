@@ -7,4 +7,6 @@
  RUN pip install --upgrade pip
  RUN pip install -r requirements.txt
  ADD . /backend/
+ RUN apt-get update
+ RUN apt install nano
  EXPOSE 8000
