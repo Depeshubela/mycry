@@ -21,7 +21,8 @@ services:
       - 80:80
     volumes:
       - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf
-      - ./mycry/dist:/var/www/mycry
+      # - ./mycry/dist:/var/www/mycry
+      - ./mycry/dist:/usr/share/nginx/html
     depends_on:
       - backend
   redis:
