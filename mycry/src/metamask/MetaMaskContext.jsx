@@ -29,7 +29,7 @@ export const MyMetaMaskProvider = ({ children }) => {
   const contractAddress = "0xD83Ad6b2B3Aff6c5fCCB17fa8901E1B5401873d9";
   const usdtcontractABI = USDT_ABI;
   const usdtcontractAddress = "0x0f5d5521e0dFA45778973a077433F1331c0F9390";
-  console.log("META")
+  // console.log("META")
   useEffect(()=>{
     const switchEthereumChain = async () => {
       try {
@@ -38,7 +38,7 @@ export const MyMetaMaskProvider = ({ children }) => {
           params: [{ chainId: '0x66eee' }],
         });
       } catch (e) {
-        if (e.code == 4902 && connected) {
+        if (e.code == 4902) {
           try {
             await window.ethereum.request({
               method: 'wallet_addEthereumChain',

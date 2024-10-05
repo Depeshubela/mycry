@@ -25,7 +25,7 @@ const foxMainPage = () => {
       contractAddress
       } = useContext(MetaMaskContext);
 
-      console.log("fmain")
+      // console.log("fmain")
     const [inputImg,setInputImg] = useState('ETH');
     const [nowToken, setNowToken] = useState('ETH');
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
