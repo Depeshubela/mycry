@@ -121,7 +121,7 @@ export const APIContextProvider = ({ children }) => {
 
         
 
-    const getInitUserDatas = useCallback(async ()  => {
+    const getInitUserDatas = async ()  => {
         try{
             const response = await apiAuthInstance.get('getUserAddressDatas/');
             const data = response.data;
@@ -141,8 +141,8 @@ export const APIContextProvider = ({ children }) => {
                 }
               }
         }
-    },[])
-    const refreshBalance = useCallback(async ()  => {
+    }
+    const refreshBalance = async ()  => {
       try{
           const response = await apiAuthInstance.get('refreshBalance/');
           const data = response.data;
@@ -160,8 +160,8 @@ export const APIContextProvider = ({ children }) => {
       }catch(e){
           console.log(e)
       }
-  },[])
-    const getUSDUSDTPrice = useCallback(async ()  => {
+  }
+    const getUSDUSDTPrice = async ()  => {
       try{
           const response = await apiInstance.get('getUSDUSDTPrice/');
           const data = response.data;
@@ -169,11 +169,11 @@ export const APIContextProvider = ({ children }) => {
       }catch(e){
           console.log(e)
       }
-   },[])
+   }
    
 
 
-    const buyTokenWithETH = useCallback(async ()  => {
+    const buyTokenWithETH = async ()  => {
       var buyAmount = maxInput.current.value;
 
       const playAmount = buyAmount * 10;
@@ -256,9 +256,9 @@ export const APIContextProvider = ({ children }) => {
         setErrorLog('CouldNotBeNull')
       }
       
-    },[])
+    }
 
-    const buyTokenWithUSDT = useCallback(async ()  => {
+    const buyTokenWithUSDT = async ()  => {
       var buyAmount = maxInput.current.value;
 
       const playAmount = parseFloat(buyAmount / currentUSDTPrice).toFixed(6)
@@ -338,9 +338,9 @@ export const APIContextProvider = ({ children }) => {
       else{
         setErrorLog('CouldNotBeNull')
       }
-    },[])
+    }
     
-    const openInput = useCallback(() => {
+    const openInput = () => {
       swalWithReact.fire({
         // title: '請輸入您要質押的數量',
         title: intl.formatMessage({ id: 'alert.title.stakeAmount', defaultMessage: '請輸入您要質押的數量' }),
@@ -371,7 +371,7 @@ export const APIContextProvider = ({ children }) => {
           });
         }
       });
-    },[userNowBalance])
+    }
 
     const initStake = (stakeValue) => {
       if(stakeValue){
@@ -447,7 +447,7 @@ export const APIContextProvider = ({ children }) => {
       }
     }
 
-    const withdrawStake = useCallback(async() => {
+    const withdrawStake = async() => {
       if (userStaked != 0){
         swalWithReact.fire({
           // title: `您有${parseFloat(userStaked.toFixed(6))}顆$PLAY質押可提領`,
@@ -521,7 +521,7 @@ export const APIContextProvider = ({ children }) => {
           // cancelButtonText: intl.formatMessage({ id: 'alert.cancelButton', defaultMessage: '取消' })
         })
       }     
-    },[userStaked])
+    }
 
 
 

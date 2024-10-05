@@ -120,7 +120,7 @@ export const MyMetaMaskProvider = ({ children }) => {
 
 
 
-  const connect = useCallback(async () => {
+  const connect = async () => {
     try {
         // console.log(connected)
       const accounts = await sdk?.connect();
@@ -130,8 +130,8 @@ export const MyMetaMaskProvider = ({ children }) => {
     } catch (err) {
       console.warn("failed to connect..", err);
     }
-  },[]);
-  const disconnect = useCallback(async () => {
+  }
+  const disconnect = async () => {
     try {
       const accounts = await sdk?.terminate();
       removeCookie('userAddress')
@@ -141,15 +141,15 @@ export const MyMetaMaskProvider = ({ children }) => {
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
-  },[])
-  const makeAddress = useCallback(() => {
+  }
+  const makeAddress = () => {
     let frontPart = account.slice(0, 6); // 取得前四個字
     let endPart = account.slice(-4); // 取得後四個字
     let result = `${frontPart}...${endPart}`; // 拼接字串
     setHideAddress(result);
-  },[])
+  }
 
-  const getMainBalance = useCallback(async() => {
+  const getMainBalance = async() => {
     const accounts = await ethereum.request({method:'eth_requestAccounts'})
     const ethbalance = await ethereum.request({method:'eth_getBalance',params:[account,'latest'],"id":1})
     let amount = parseFloat(web3.utils.fromWei(ethbalance,'ether')).toFixed(6)
@@ -160,10 +160,10 @@ export const MyMetaMaskProvider = ({ children }) => {
     if (parseFloat(amount) <= 0.015){
       setErrorLog('請確保您有大於0.015 ETH 以支付GAS與購買費用')
     }
-  },[])
+  }
 
 
-  const getContractBalance = useCallback(async() => {
+  const getContractBalance = async() => {
     // try {
       const balanceOf = await contract.methods.balanceOf(account).call();
       const stakeData = await contract.methods.stakeDataView(account).call();
@@ -197,8 +197,7 @@ export const MyMetaMaskProvider = ({ children }) => {
     // } catch (error) {
     //     console.error("User denied account access");
     // }
-  },[])
-
+  }
 
 
   return (
