@@ -2,8 +2,8 @@ import axios from 'axios'
 import {jwtDecode} from 'jwt-decode';
 // console.log("API")
 export const apiInstance = axios.create({
-    // baseURL: 'http://192.168.100.129/api/',
-    baseURL: 'http://localhost:8000/',
+    baseURL: 'http://54.248.128.179/api/',
+    // baseURL: 'http://localhost:8000/',
     headers:{
         'Content-Type':'application/json',
         Accept:'application/json',
@@ -11,8 +11,8 @@ export const apiInstance = axios.create({
 })
 
 export const apiAuthInstance = axios.create({
-    // baseURL: 'http://192.168.100.129/api/',
-    baseURL: 'http://localhost:8000/',
+    baseURL: 'http://54.248.128.179/api/',
+    // baseURL: 'http://localhost:8000/',
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

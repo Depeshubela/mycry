@@ -36,7 +36,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = "django-insecure-qnmjrt$99!p(=@y)-k&65+phb3)fwdd#q^#ot@xbc@v66*%qg7"
 SECRET_KEY = "django-insecure-qnmjrt$99!p(=@y)-k&65+phb3)fwdd#q^#ot@xbc@v66*%qg7"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -98,14 +98,23 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         # "ENGINE": "django.db.backends.sqlite3",
+#         "ENGINE": "django_prometheus.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 DATABASES = {
-    "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        "ENGINE": "django_prometheus.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': {
+        'ENGINE': "django_prometheus.db.backends.postgresql",
+        'NAME': "mycry",
+        'USER': "postgres",
+        'PASSWORD': "joy50923",
+        'HOST': "mycry.cjmus6oeqzeh.ap-northeast-1.rds.amazonaws.com",
+        'PORT': "5432",
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
