@@ -12,16 +12,16 @@ services:
     # ports:
     #   - "5173:5173"
     command: sh entrypoint.sh
-    working_dir: /playdoge
+    working_dir: /mycry
     volumes:
-      - ./playdoge/:/playdoge
+      - ./mycry/:/mycry
   nginx:
     image: nginx:1.27
     ports:
       - 80:80
     volumes:
       - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf
-      - ./playdoge/dist:/var/www/playdoge
+      - ./mycry/dist:/var/www/mycry
     depends_on:
       - backend
   redis:
