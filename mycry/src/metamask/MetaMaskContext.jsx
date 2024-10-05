@@ -56,7 +56,10 @@ export const MyMetaMaskProvider = ({ children }) => {
                 },
               ],
             });
-            
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x66eee' }],
+            });
 
           } catch (addError) {
             // console.error('123',addError);

@@ -264,11 +264,11 @@ const foxMainPage = () => {
                 </div> */}
                 <div className={classNames('pb-1 text-[14px]')}>
                   <span><FormattedMessage defaultMessage="你已購買的$PLAY" id="main.right.bought"></FormattedMessage></span>
-                  <span> = {Number(userTotalBalance).toPrecision(8)}</span>
+                  <span> = {parseFloat(parseFloat(userTotalBalance).toFixed(8))}</span>
                 </div>
                 <div className={classNames('pb-1 text-base text-[13px]')}>
                   <span><FormattedMessage defaultMessage="你可質押的的$PLAY" id="main.right.canStake"></FormattedMessage></span>
-                  <span> = {Number(userNowBalance).toPrecision(8)}</span>
+                  <span> = {parseFloat(parseFloat(userNowBalance).toFixed(8))}</span>
                 </div>
 
                 <div className={classNames(' w-full flex flex-col items-center h-full')}>

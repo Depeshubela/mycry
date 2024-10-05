@@ -68,7 +68,7 @@ const foxStakePage = () => {
     const withdrawStake = async() => {
       // console.log(userStaked.toPrecision(6))
       withReactContent(Swal).fire({
-        title: `您有${userStaked.toPrecision(6)}顆$PLAY質押可提領`,
+        title: `您有${parseFloat(parseFloat(userStaked).toFixed(6))}顆$PLAY質押可提領`,
         // html: "",
         imageUrl: '/icon/playdogelogo.png',
         imageHeight: 188,
