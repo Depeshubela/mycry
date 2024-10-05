@@ -1,0 +1,42 @@
+.bg{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('/login/loginBG.svg');
+    background-repeat:no-repeat;
+    background-size:100% 100%; 
+    position: relative;
+}
+.c_ep{
+    bottom: 35%;
+}
+.c_em{
+    bottom: 40%;
+}
+.c_pic{
+    bottom: 10%;
+}
+.c_pic button{
+    margin-right: 3rem;
+}
+.f_bt{
+    height: 65%;
+}
+.login_btn{
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+}
+.lt{
+    font-size: 30px;
+    color:#49cb71;
+    user-select: none;
+}
+.lb{
+    border-width: 0 0 1px 0;
+    border-color:#49cb71;
+    font-size: 30px;
+}
