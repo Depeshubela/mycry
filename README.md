@@ -5,7 +5,7 @@
 本專案目標為實現網站與區塊鏈合約之交互使用，於專案內分為兩種模式
 ### 會員模式
 
-用戶需註冊並登入後才可於合約進行合約互動，且錢包由網站管理員(後端資料庫)統一保管
+用戶需註冊並登入後才可於合約進行合約互動，錢包由網站管理員(後端資料庫)統一保管、調用
 
 以前後端分離的方式用RESTful API做前後端溝通
 
@@ -17,15 +17,13 @@
 
 ## 主要使用工具
 ### 網頁
-* 前端:React (Vite、tailwindcss、Metamask SDK)
+* 前端:React (Vite、tailwindcss、MetaMask SDK)
 
-* 後端:Python-Django (PostgreSQL、Redis、Prometheus、Grafana)
+* 後端:Django (PostgreSQL、Redis、Prometheus、Grafana)
 
 * 合約:Solidity (Remix撰寫、測試，Hardhat部屬於[Arbi鏈](https://sepolia.arbiscan.io/token/0xd83ad6b2b3aff6c5fccb17fa8901e1b5401873d9?a=0xD83Ad6b2B3Aff6c5fCCB17fa8901E1B5401873d9))
-### 開發與運行環境
-開發於Windows
-
-運行於AWS EC2 Linux Ubuntu Docker容器中
+### 運行環境
+AWS EC2 Linux Ubuntu Docker容器中
 
 ## 會員模式功能介紹
 
