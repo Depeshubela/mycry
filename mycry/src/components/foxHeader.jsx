@@ -15,12 +15,12 @@ const FoxHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
     const [lang, setLang] = useState('zh-TW')
     const headerRef = useRef(null);
     const location = useLocation();
+
     useEffect(() => {
         if (headerRef.current) {
             setHeaderHeight(headerRef.current.clientHeight); // 將高度通過 props 傳遞給父組件
         }
     }, [setHeaderHeight]);
-    
 
     useEffect(() => {
         changeLang()
@@ -31,28 +31,21 @@ const FoxHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
         const data = await resp.json()
         setLocale(data)
       }
-    //   console.log(location.pathname.includes('metamask'))
+
     return (
         <div ref={headerRef} className={classNames('bg-[#FFEE52] mx-auto')}>
             <div className='container w-[1270px] mx-auto flex justify-between p-2'>
                 <div className="flex items-center w-[40%] gap-2">
                     <Link to={ROUTES.MCC_FOX_MAIN} className="flex items-center w-full">
                         <img className='w-full h-[50px]' src='/icon/mycry/mycryCrypto.png' ></img></Link>
-                    
                     <Link to={ROUTES.MCC_FOX_STAKE} className="flex w-1/2 text-center h-full">
                             <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>質押</p></Link>
-                    
                     <Link to={ROUTES.MCC_BACK_MAIN} className="flex w-1/2 text-center h-full">
                         <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>會員模式</p></Link>
-                    
                     <Link to={ROUTES.MCC_COPYRIGHT} className="flex w-1/2 text-center h-full">
                         <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>版權聲明</p></Link>
-                        
-                    
                 </div>
                 <div className="flex items-center gap-2 f-[20%]">
-                    
-                    
                     {account ? 
                         <button onClick={disconnect} className='p-1 border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black h-full'>{hideAddress}</button>
                         : 
@@ -63,11 +56,9 @@ const FoxHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
                         <option value="zh-TW">繁體中文</option>
                         <option value="jp">日本語</option>
                     </select>
-                    
                 </div>
             </div>
         </div>
-
     );
 };
 

@@ -1,4 +1,3 @@
-// MetaMaskContext.jsx
 import React, { createContext, useState, useEffect,useCallback } from 'react';
 import { useSDK } from "@metamask/sdk-react";
 import Web3 from 'web3';
@@ -29,7 +28,8 @@ export const MyMetaMaskProvider = ({ children }) => {
   const contractAddress = "0xD83Ad6b2B3Aff6c5fCCB17fa8901E1B5401873d9";
   const usdtcontractABI = USDT_ABI;
   const usdtcontractAddress = "0x0f5d5521e0dFA45778973a077433F1331c0F9390";
-  // console.log("META")
+
+  //檢查小狐狸是否已加入arbi sepolia鏈並切換過去
   useEffect(()=>{
     const switchEthereumChain = async () => {
       try {
@@ -62,16 +62,17 @@ export const MyMetaMaskProvider = ({ children }) => {
             });
 
           } catch (addError) {
-            // console.error('123',addError);
+            console.error('no.4902:',addError);
           }
         }
-        // console.error(e)
       }
     }
     switchEthereumChain()
   },[])
 
+
   useEffect(()=>{
+    //如果餅乾有存地址，則直接設定地址給小狐狸
     const checkConnection = async () => {
       const accounts = getCookie('userAddress');
       if (accounts && accounts.length > 0 && !connected) {
@@ -80,49 +81,45 @@ export const MyMetaMaskProvider = ({ children }) => {
       }
     };
     checkConnection();
+
     if(account){
         makeAddress()
     }
     
     if (typeof window.ethereum != 'undefined' && connected && window.ethereum.isMetaMask) {
       try {
-    
-        // Initialize Web3
+        // 初始化Web3
         const web3Instance = new Web3(window.ethereum);
         setWeb3(web3Instance);
 
-        // Initialize Contract
+        // 初始化Token合約
         const contractInstance = new web3Instance.eth.Contract(contractABI, contractAddress);
         setContract(contractInstance);
-
+        
+        //初始化USDT合約
         const usdtcontract = new web3Instance.eth.Contract(usdtcontractABI,usdtcontractAddress);
         setUSDTContract(usdtcontract);
-        
       } catch (error) {
-        console.error("Error initializing Web3 or Contract:", error);
+        console.error("初始化Web3或合約錯誤:", error);
       }
     }
   },[account])   
 
+  //若已連接成功，且沒有餅乾則存進並初始化各種值
   useEffect(() => {
     if (account && connected && web3 && contract && chainId) {
-      // console.log(web3, contract);
-      
       if (!getCookie('userAddress')) {
         setCookie('userAddress', account, 0.5);
       }
       getContractBalance();
       getMainBalance();
     }
-  
     if (parseFloat(userETHBalance) > 0.015) {
       setErrorLog(null);
     }
   }, [account, connected, web3, contract,chainId]);
 
-
-
-
+  //小狐狸連接
   const connect = async () => {
     try {
         // console.log(connected)
@@ -134,17 +131,20 @@ export const MyMetaMaskProvider = ({ children }) => {
       console.warn("failed to connect..", err);
     }
   }
+
+  //小狐狸斷線
   const disconnect = async () => {
     try {
       const accounts = await sdk?.terminate();
       removeCookie('userAddress')
       setAccount(accounts?.[0]);
       setConnected(false)
-      
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
   }
+
+  //把地址縮寫並放上header
   const makeAddress = () => {
     let frontPart = account.slice(0, 6); // 取得前四個字
     let endPart = account.slice(-4); // 取得後四個字
@@ -152,6 +152,7 @@ export const MyMetaMaskProvider = ({ children }) => {
     setHideAddress(result);
   }
 
+  //取得arbi sepolia的ETH餘額
   const getMainBalance = async() => {
     const accounts = await ethereum.request({method:'eth_requestAccounts'})
     const ethbalance = await ethereum.request({method:'eth_getBalance',params:[account,'latest'],"id":1})
@@ -159,19 +160,17 @@ export const MyMetaMaskProvider = ({ children }) => {
     setUserETHBalance(amount);
     const usdtbalance = await USDTcontract.methods.balanceOf(account).call();
     setUserUSDTBalance(parseFloat(web3.utils.fromWei(usdtbalance,'picoether')).toFixed(3));
-    // amount = 0.01;
     if (parseFloat(amount) <= 0.015){
       setErrorLog('請確保您有大於0.015 ETH 以支付GAS與購買費用')
     }
   }
 
-
+  //取得Token各項餘額
   const getContractBalance = async() => {
-    // try {
+    try {
       const balanceOf = await contract.methods.balanceOf(account).call();
       const stakeData = await contract.methods.stakeDataView(account).call();
       const allStaked = await contract.methods.stakedAmount(account).call();
-      // console.log(web3.utils.fromWei(allStaked,'ether'))
       setAllStaking(parseFloat(web3.utils.fromWei(allStaked,'ether')));
       let balance = BigInt(balanceOf);
       let rate = 0;
@@ -186,10 +185,7 @@ export const MyMetaMaskProvider = ({ children }) => {
         }
         balance += BigInt(element[1]);
       }
-      // console.log(rate)
-      
       const finalBalance = web3.utils.fromWei(balance,'ether');
-      
       const contractBalanceData = () =>{
         setStakeRate(rate);
         setUserNowBalance(web3.utils.fromWei(balanceOf,'ether')); 
@@ -197,9 +193,9 @@ export const MyMetaMaskProvider = ({ children }) => {
         setUserStaked((finalBalance - web3.utils.fromWei(balanceOf,'ether')))
       }
       contractBalanceData()
-    // } catch (error) {
-    //     console.error("User denied account access");
-    // }
+    } catch (error) {
+        console.error("User denied account access");
+    }
   }
 
 

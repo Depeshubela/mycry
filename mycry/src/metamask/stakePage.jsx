@@ -7,7 +7,6 @@ import {MetaMaskContext} from "./MetaMaskContext";
 import { FormattedMessage } from "react-intl";
 
 const foxStakePage = () => {
-    
   const { 
     account,
     connected,
@@ -22,6 +21,7 @@ const foxStakePage = () => {
     contractAddress
     } = useContext(MetaMaskContext);
 
+    //若已連接成功，且沒有餅乾則存進並初始化各種值
     useEffect(() => {
       if (account && connected && web3 && contract) {
         if (!getCookie('userAddress')) {
@@ -32,8 +32,7 @@ const foxStakePage = () => {
   
     }, [account, connected, web3, contract]);
 
-
-
+    //馬上質押按下去開啟小視窗設定質押數
     const openInput = () => {
       withReactContent(Swal).fire({
         title: '請輸入您要質押的數量',
@@ -65,11 +64,10 @@ const foxStakePage = () => {
       });
     };
     
+    //提領質押Token
     const withdrawStake = async() => {
-      // console.log(userStaked.toPrecision(6))
       withReactContent(Swal).fire({
         title: `您有${parseFloat(parseFloat(userStaked).toFixed(6))}顆$PLAY質押可提領`,
-        // html: "",
         imageUrl: '/icon/playdogelogo.png',
         imageHeight: 188,
         imageWidth: 188,
@@ -94,11 +92,6 @@ const foxStakePage = () => {
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: '確認',
               })
-              // .then(async (res)=>{
-              //   if(res.isConfirmed){
-              //     await getContractBalance()
-              //   }
-              // })
             }
           })
           .on('receipt', (receipt) =>{
@@ -117,6 +110,7 @@ const foxStakePage = () => {
       })
     }
     
+    //呼叫質押開始質押
     const setStake = (transAmount) => {
       contract.methods.setStake(transAmount).send({from:account})
       .once('transactionHash', (transactionHash) => {
@@ -131,11 +125,6 @@ const foxStakePage = () => {
             confirmButtonColor: '#3085d6',
             confirmButtonText: '確認',
           })
-          // .then(async (res)=>{
-          //   if(res.isConfirmed){
-          //     await getContractBalance()
-          //   }
-          // })
         }
       })
       .on('receipt', (receipt) =>{
@@ -151,11 +140,12 @@ const foxStakePage = () => {
         console.error('質押存入錯誤:', error);
       });
     }
+
+    //彈窗輸入欲質押數量後的確認與檢查授權數
     const initStake = (stakeValue) => {
       if(stakeValue){
         withReactContent(Swal).fire({
           title: `您即將質押${stakeValue}顆$PLAY`,
-          // html: "",
           imageUrl: '/icon/playdogelogo.png',
           imageHeight: 188,
           imageWidth: 188,
@@ -166,13 +156,11 @@ const foxStakePage = () => {
           confirmButtonText: '確認質押',
           cancelButtonText: '取消'
         }).then((result)=>{
-          // const allowance = contract.methods.allowance(account,contractAddress).call();
           if (result.isConfirmed) {
             let transAmount = web3.utils.toWei(stakeValue,'ether');
             contract.methods.allowance(account,contractAddress).call()
             .then((res)=>{
               if (res < transAmount){
-                // console.log(transAmount , Number(res))
                 contract.methods.approve(contractAddress,transAmount).send({from:account})
                 .on('receipt', (receipt) => {
                   if (receipt['status'] == 1) {
@@ -195,19 +183,14 @@ const foxStakePage = () => {
       }else{
         withReactContent(Swal).fire({
           title: `請輸入值鴨數量`,
-          // html: "",
           imageUrl: '/icon/playdogelogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',
-          // showCancelButton: true,
           confirmButtonColor: '#3085d6',
-          // cancelButtonColor: '#d33',
           confirmButtonText: '確認',
-          // cancelButtonText: '取消'
         })
       }
-      
     }
     
     return (
@@ -265,12 +248,6 @@ const foxStakePage = () => {
                 <span className='text-[12px]'><img className='h-auto w-auto inline-block' src='/icon/ani-arrow.svg'></img><FormattedMessage defaultMessage="５年以後４０％" id="stake.fiveYear"></FormattedMessage></span>
               </div>
             </div>
-            {/* <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
-              <div>
-                <span className='mb-1'>當前獎勵</span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>0<span className='text-[12px] ml-2'>Per ETH Block</span></h2>
-              </div>
-            </div> */}
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="總獎勵" id="stake.totalRewards"></FormattedMessage></span>
@@ -279,6 +256,7 @@ const foxStakePage = () => {
             </div>
           </div>
         </div>
+        <img src="/icon/mycry/fox.gif" className="absolute bottom-[7rem] right-[8rem] transform scale-x-[-1]" /> 
       </div>
     );
 }

@@ -19,38 +19,6 @@ import {AuthProvider} from "./components/auth/authContext";
 import Page404 from "./errorPage/404";
 import Copyright from "./components/copyright";
 import CopyrightHeader from "./components/copyrightHeader";
-// function App() {
-//     const [headerHeight, setHeaderHeight] = useState(0);
-//     const [locale, setLocale] = useState('zh-TW')
-//     return (
-//       <>
-//         <IntlProvider messages={locale} locale={'zh-TW'} defaultLocale={'zh-TW'}> 
-//           <MetaMaskProvider>
-          
-//             <Router >
-//               <AuthProvider>
-//               <APIContextProvider>
-//                 <Routes>
-                  
-//                     <Route path={ROUTES.MCC_FOX_MAIN} element={<><FoxHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><FoxMainPage/></>}/>
-//                     <Route path={ROUTES.MCC_FOX_STAKE} element={<><FoxHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><FoxStakePage/></>}/>
-//                     <Route path={ROUTES.MCC_BACK_LOGIN} element={<><BackLogin/></>}/>
-//                     <Route path={ROUTES.MCC_BACK_STAKE} element={<PrivateRoute><BackHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><BackStakePage/></PrivateRoute>}/>
-//                     <Route path={ROUTES.MCC_BACK_MAIN} element={<PrivateRoute><BackHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><BackMainPage/></PrivateRoute>}/>
-//                     <Route path={ROUTES.MCC_BACK_REGISTER} element={<><BackRegister/></>}/>
-//                     <Route path={ROUTES.MCC_BACK_REGISTERCONFIRM} element={<><BackRegisterConfirm/></>}/>
-//                     <Route path='*' element={<><Page404/></>}/>
-//                 </Routes>
-//                 </APIContextProvider>
-//               </AuthProvider>
-//             </Router>
-          
-//           </MetaMaskProvider>
-//         </IntlProvider>
-//       </>
-//     );
-// }
-
 
 const FoxRoutes = ({ setHeaderHeight, setLocale }) => {
   return (
@@ -106,9 +74,5 @@ const App = () => {
       </IntlProvider>
   );
 };
-
-
-
-
 
 export default App;

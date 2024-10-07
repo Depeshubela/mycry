@@ -118,7 +118,7 @@ const MainPage = () => {
     
     return (
 
-      <div className={classNames('flex mx-auto h-[94vh] bg-[url(/icon/mycry/mycryBG_noc.png)] bg-[length:100%_100%] bg-center bg-no-repeat justify-around')}>
+      <div className={classNames('flex mx-auto h-[94vh] bg-[url(/icon/mycry/mycryBG_noc.png)] bg-[length:100%_100%] bg-center bg-no-repeat justify-around relative')}>
         <div className='container w-[1270px]' >
           <div className={classNames('flex mx-auto w-full h-[94vh]  justify-between')}>
             <div className={classNames(' w-8/12 h-3/6 flex mt-10 flex-col ')}>
@@ -163,14 +163,6 @@ const MainPage = () => {
                     <div className={'text-[14px]'}><FormattedMessage defaultMessage="秒" id="main.right.seconds"></FormattedMessage></div>
                   </div>
                 </div>
-                {/* <div className={'w-full px-6 pb-6 mt-2'}>
-                    <ProgressBarComponent numerator={25} denominator={100} />
-                </div>
-                <div className={classNames('pb-1 text-[15px]')}>
-                  <span>已籌集USDT: </span>
-                  <span>$1234</span>
-                  <span> / $5678</span>
-                </div> */}
                 <div className={classNames('pb-1 text-[14px]')}>
                   <span><FormattedMessage defaultMessage="你已購買的$PLAY" id="main.right.bought"></FormattedMessage></span>
                   <span> = {userTotalBalance}</span>
@@ -227,7 +219,6 @@ const MainPage = () => {
                   </div>
                   <div className='w-full break-words'>
                     {userAddress && errorLog && (
-                      // <p className='mt-2 text-center text-[14px] text-red-500 font-medium'>{errorLog}</p>
                       <p className="mt-2 text-center text-[14px] text-red-500 font-medium">
                         <FormattedMessage 
                           defaultMessage="" 
@@ -235,12 +226,6 @@ const MainPage = () => {
                         />
                       </p>
                     ) 
-                    // : 
-                    //   buyTokenTx && 
-                    //   <p className='mt-2 font-medium'>
-                    //     <span className='text-base'>Transaction&nbsp;Hash:</span>
-                    //     <span className='text-sm text-blue-500 underline'><a href={`https://sepolia.arbiscan.io/tx/${buyTokenTx}`} target="_blank">{buyTokenTx}</a></span>
-                    //   </p>
                     }
                   </div>
                   <div className={classNames('w-full flex justify-center items-center flex-col h-full')}>
@@ -263,13 +248,13 @@ const MainPage = () => {
                         </div>
                       </>
                     )}
-                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <img src="/icon/mycry/chicken.gif" className="absolute bottom-[10rem] left-[24rem]" /> 
       </div>
     );
 }

@@ -1,7 +1,9 @@
 from web3 import Web3
 from django.conf import settings
 import json
+
 w3 = Web3(Web3.HTTPProvider(settings.ARB_SEPOLIA_RPC))
+
 with open(settings.USDT_ABI_URL, 'r') as f:
     usdt_abi = json.load(f)
 

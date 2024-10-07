@@ -31,8 +31,9 @@ export const APIContextProvider = ({ children }) => {
 
     const maxInput = useRef(null);
     const calcDoge = useRef(null);
-    // console.log("APIb")
-    //1次
+
+
+    //登入後call一次刷新資料並定期呼叫API更新USDTUSD
     useEffect(() => {
       if(user){
         const getNewData = () => {
@@ -48,6 +49,7 @@ export const APIContextProvider = ({ children }) => {
       }
     }, [user]);
 
+    //更新回報率與總獎勵
     useEffect(()=>{
       if(dataLock){
         const setRewardsData = () => {
@@ -58,9 +60,9 @@ export const APIContextProvider = ({ children }) => {
       }
     },[userStaked,stakeRate])
 
+    //更新池占比
     useEffect(()=>{
       if(dataLock){
-        // console.log(poolPersent,userStaked,allStaking)
         setPoolPersent(allStaking != '載入中' && userStaked ? Number((userStaked / allStaking * 100).toFixed(2)) : 0)
       }
     },[userStaked,allStaking])
@@ -92,6 +94,7 @@ export const APIContextProvider = ({ children }) => {
     // };
     // const [state, dispatch] = useReducer(reducer, initialState);
 
+    
     const setUserData = (data,state) => {
     //   dispatch({
     //     type: 'SET_USER_DATA',
@@ -111,27 +114,18 @@ export const APIContextProvider = ({ children }) => {
       setUserNowBalance(parseFloat(parseFloat(data['datas']['tokenBalance']).toFixed(6)));
       setUserStaked(parseFloat(parseFloat(data['datas']['staked']).toFixed(6)));
       if(state === 'new'){
-        // console.log(data['allStaking'])
         setStakeRate(parseFloat(parseFloat(data['rate']).toFixed(6)))
         setAllStaking(parseFloat(parseFloat(data['allStaking']).toFixed(6)))
         setDataLock(true)
       }
   };
 
-
-        
-
+    //登入時呼叫，接收"舊"資料
     const getInitUserDatas = async ()  => {
         try{
             const response = await apiAuthInstance.get('getUserAddressDatas/');
             const data = response.data;
             setUserData(data,'old');
-            // setUserAddress(data['datas']['ethAddress'])
-            // setUserETHBalance(parseFloat(parseFloat(data['datas']['ethBalance']).toFixed(6)))
-            // setUserUSDTBalance(parseFloat(parseFloat(data['datas']['usdtBalance']).toFixed(6)))
-            // setUserTotalBalance(parseFloat((new Decimal(data['datas']['staked']).add(new Decimal(data['datas']['tokenBalance']))).toFixed(6)))
-            // setUserNowBalance(parseFloat(parseFloat(data['datas']['tokenBalance']).toFixed(6)))
-            // setUserStaked(parseFloat(parseFloat(data['datas']['staked']).toFixed(6)))
         }catch(e){
             if(e == 'Token 已過期'){
                 try{
@@ -142,25 +136,20 @@ export const APIContextProvider = ({ children }) => {
               }
         }
     }
+
+    //刷新資料，"新"資料
     const refreshBalance = async ()  => {
       try{
           const response = await apiAuthInstance.get('refreshBalance/');
           const data = response.data;
-          // setUserAddress(data['datas']['ethAddress'])
-          // setUserETHBalance(parseFloat(parseFloat(data['datas']['ethBalance']).toFixed(6)))
-          // setUserUSDTBalance(parseFloat(parseFloat(data['datas']['usdtBalance']).toFixed(6)))
-          // setUserTotalBalance(parseFloat((new Decimal(data['datas']['staked']).add(new Decimal(data['datas']['tokenBalance']))).toFixed(6)))
-          // setUserNowBalance(parseFloat(parseFloat(data['datas']['tokenBalance']).toFixed(6)))
-          // setUserStaked(parseFloat(parseFloat(data['datas']['staked']).toFixed(6)))
-          // setStakeRate(parseFloat(parseFloat(data['rate']).toFixed(6)))
-          // setAllStaking(parseFloat(parseFloat(data['allStaking']).toFixed(6)))
-          // setDataLock(true)
           setUserData(data,'new');
 
       }catch(e){
           console.log(e)
       }
   }
+
+  //接收USDTUSD對幣價
     const getUSDUSDTPrice = async ()  => {
       try{
           const response = await apiInstance.get('getUSDUSDTPrice/');
@@ -172,7 +161,7 @@ export const APIContextProvider = ({ children }) => {
    }
    
 
-
+    //用ETH買TOKEN
     const buyTokenWithETH = async ()  => {
       var buyAmount = maxInput.current.value;
 
@@ -189,7 +178,6 @@ export const APIContextProvider = ({ children }) => {
       if (buyAmount){
         swalWithReact.fire({
           title: intl.formatMessage({ id: 'alert.title.transConfirm', defaultMessage: `交易確認` }),
-          // html:`您即將花費${buyAmount} E購買 ${buyAmount * 10} $PLAY<br><br><p class='text-red-500'>請注意，匯率隨時間變動，實際收到數量可能會有誤差</p>`,
           html: `<p>${htmlMessage}</p><br/><p class="text-red-500">${warningMessage}</p>`,
           icon:'warning',
           background: '#FFF5E9',
@@ -226,8 +214,6 @@ export const APIContextProvider = ({ children }) => {
                 setErrorLog('')
                 refreshBalance()
               }
-              // console.log(data)
-
             }catch(e){
                 console.log(e)
                 var error = e['response']['data']['payAmount'] ? e['response']['data']['payAmount'] : e['response']['data']['message']
@@ -241,14 +227,9 @@ export const APIContextProvider = ({ children }) => {
               html:html,
               icon:icon,
               background: '#FFF5E9',
-              // showCancelButton: true,
               confirmButtonColor: '#3085d6',
-              // cancelButtonColor: '#d33',
               confirmButtonText: intl.formatMessage({ id: 'alert.confirmButton', defaultMessage: '確認' }),
-              // cancelButtonText: intl.formatMessage({ id: 'alert.cancelButton', defaultMessage: '取消' })
             })
-
-
           }
         })
       }
@@ -258,9 +239,9 @@ export const APIContextProvider = ({ children }) => {
       
     }
 
+    //用USDT買TOKEN
     const buyTokenWithUSDT = async ()  => {
       var buyAmount = maxInput.current.value;
-
       const playAmount = parseFloat(buyAmount / currentUSDTPrice).toFixed(6)
       const htmlMessage = intl.formatMessage({
         id: 'alert.html.buyTokenWithUSDT.message',defaultMessage: '您即將花費 {buyAmount} E 購買 {playAmount} $PLAY'},
@@ -275,7 +256,6 @@ export const APIContextProvider = ({ children }) => {
         swalWithReact.fire({
           title: intl.formatMessage({ id: 'alert.title.transConfirm', defaultMessage: `交易確認` }),
           html: `<p>${htmlMessage}</p><br/><p class="text-red-500">${warningMessage}</p>`,
-          // html:intl.formatMessage({ id: 'alert.html.buyTokenWithUSDT', defaultMessage: `您即將花費${buyAmount} U購買 ${parseFloat(buyAmount / currentUSDTPrice).toFixed(6)} $PLAY<br><br><p class='text-red-500'>請注意，匯率隨時間變動，實際收到數量可能會有誤差</p>` }),
           icon:'warning',
           background: '#FFF5E9',
           showCancelButton: true,
@@ -297,9 +277,6 @@ export const APIContextProvider = ({ children }) => {
               allowEscapeKey: false,
             });
             swalWithReact.showLoading();
-
-
-
             try{
               const response = await apiAuthInstance.post('buyTokenWithUSDT/',{
                 payAmount:buyAmount,
@@ -314,7 +291,6 @@ export const APIContextProvider = ({ children }) => {
                 setErrorLog('')
                 refreshBalance()
               }
-              // console.log(data)
             }catch(e){
                 console.log(e)
                 var error = e['response']['data']['payAmount'] ? e['response']['data']['payAmount'] : e['response']['data']['message']
@@ -323,7 +299,6 @@ export const APIContextProvider = ({ children }) => {
                 html = `<p class='text-red-500'>${error}</p>`
                 icon = 'error'
             }
-
             swalWithReact.fire({
               title: title,
               html:html,
@@ -340,9 +315,9 @@ export const APIContextProvider = ({ children }) => {
       }
     }
     
+    //質押TOKEN輸入數量
     const openInput = () => {
       swalWithReact.fire({
-        // title: '請輸入您要質押的數量',
         title: intl.formatMessage({ id: 'alert.title.stakeAmount', defaultMessage: '請輸入您要質押的數量' }),
         background: '#FFF5E9',
         color: 'black',
@@ -361,7 +336,6 @@ export const APIContextProvider = ({ children }) => {
           initStake(result.value);
         } else {
           swalWithReact.fire({
-            // title: '請輸入數量',
             title: intl.formatMessage({ id: 'alert.title.stakeAmountError', defaultMessage: '請輸入質押數量' }),
             icon: 'warning',
             background: '#FFF5E9',
@@ -373,11 +347,11 @@ export const APIContextProvider = ({ children }) => {
       });
     }
 
+    //確認並呼叫質押
     const initStake = (stakeValue) => {
       if(stakeValue){
         swalWithReact.fire({
           title: intl.formatMessage({ id: 'alert.title.stakeCheck', defaultMessage: `您即將質押${stakeValue}顆$PLAY` },{stakeValue}),
-          // html: "",
           imageUrl: '/icon/playdogelogo.png',
           imageHeight: 188,
           imageWidth: 188,
@@ -433,26 +407,21 @@ export const APIContextProvider = ({ children }) => {
       }else{
         swalWithReact.fire({
           title: intl.formatMessage({ id: 'alert.title.stakeAmountError', defaultMessage: '請輸入質押數量' }),
-          // html: "",
           imageUrl: '/icon/playdogelogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',
-          // showCancelButton: true,
           confirmButtonColor: '#3085d6',
-          // cancelButtonColor: '#d33',
           confirmButtonText: intl.formatMessage({ id: 'alert.confirmButton', defaultMessage: '確認' }),
-          // cancelButtonText: intl.formatMessage({ id: 'alert.cancelButton', defaultMessage: '取消' })
         })
       }
     }
 
+    //提領質押TOKEN
     const withdrawStake = async() => {
       if (userStaked != 0){
         swalWithReact.fire({
-          // title: `您有${parseFloat(userStaked.toFixed(6))}顆$PLAY質押可提領`,
           title: intl.formatMessage({ id: 'alert.title.withdrawStake', defaultMessage: `您有${userStaked}顆$PLAY質押可提領` },{userStaked:parseFloat(userStaked.toFixed(6))}),
-          // html: "",
           imageUrl: '/icon/playdogelogo.png',
           imageHeight: 188,
           imageWidth: 188,
@@ -507,18 +476,13 @@ export const APIContextProvider = ({ children }) => {
         })
       }else{
         swalWithReact.fire({
-          // title: `您沒有可提領的$PLAY`,
           title: intl.formatMessage({ id: 'alert.title.withdrawError', defaultMessage: '您沒有可提領的$PLAY' }),
-          // html: "",
           imageUrl: '/icon/playdogelogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',
-          // showCancelButton: true,
           confirmButtonColor: '#3085d6',
-          // cancelButtonColor: '#d33',
           confirmButtonText: intl.formatMessage({ id: 'alert.confirmButton', defaultMessage: '確認' }),
-          // cancelButtonText: intl.formatMessage({ id: 'alert.cancelButton', defaultMessage: '取消' })
         })
       }     
     }

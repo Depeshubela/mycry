@@ -5,24 +5,14 @@ import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
   plugins: [react()],
-  root: '.',
-  // base:'/',
+  root: '.', //包含index.html的目錄
   server: {
-    // host:'frontend',
     host:'0.0.0.0',
     port: 5173,
-    // strictPort: true,
-    hmr:false
+    hmr:false //生產環境把熱替換關掉
     // hmr: {
-      // protocol: 'ws',
       // host: "localhost",
-      // port:80,
-      // path:'ws',
-      // clientPort: 5173
-    // },
-    // watch: {
-    //   usePolling: false 
-    // },
+    // }
   },
   build: {
     outDir: 'dist',
@@ -30,12 +20,10 @@ export default defineConfig({
       output: {
         entryFileNames: '[name]_[hash].js',
       },
-    //   input: {
-    //     main:('./index_vite.html'),
-    //   },
     },
   },
   resolve: {
+    //路徑名稱用@替代並省略副檔名
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },

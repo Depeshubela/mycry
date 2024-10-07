@@ -6,7 +6,6 @@ import route from '../router/router'
 import {MetaMaskContext} from "./MetaMaskContext";
 import { FormattedMessage } from "react-intl";
 
-// import USDT_ABI from '../SPA_USDT_ABI.json'
 const foxMainPage = () => {
     const { 
       connect,
@@ -25,7 +24,6 @@ const foxMainPage = () => {
       contractAddress
       } = useContext(MetaMaskContext);
 
-      // console.log("fmain")
     const [inputImg,setInputImg] = useState('ETH');
     const [nowToken, setNowToken] = useState('ETH');
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -34,15 +32,10 @@ const foxMainPage = () => {
     const maxInput = useRef(null);
     const calcDoge = useRef(null);
     const navigate = useNavigate();
-    // const contractABI = MCC_ABI;
-    // const contractAddress = "0x43eD634B7E742906b2d8CaE20071c7ebBfe2cdBa";
-    // const usdtcontractABI = USDT_ABI;
-    // const usdtcontractAddress = "0x0f5d5521e0dFA45778973a077433F1331c0F9390";
     var targetTimestamp = 1726715681;
     var interval;
 
     useEffect(()=>{
-      
       //倒數計時
       const updateTimer = () => {
         const nowInSeconds = Math.floor(new Date().getTime() / 1000); // 將現在的時間轉換為秒
@@ -62,17 +55,29 @@ const foxMainPage = () => {
       interval = setInterval(updateTimer, 1000); 
       return () => clearInterval(interval); 
     }, [account]);
+
+    //定時刷新獲取USDTUSD價格
     useEffect(() => {
       updateUSDTPrice()
       const intervalId = setInterval(() => {
         updateUSDTPrice()
-        // console.log('執行')
       }, 30000); // 1000ms = 1 秒
   
       // 清除定時器避免記憶體洩漏
       return () => clearInterval(intervalId);
 
     }, [currentUSDTPrice]);
+
+    //當切換幣種時更新值
+    useEffect(()=>{
+      const changeInput = () => {
+        if (maxInput.current && calcDoge.current) {
+            const event = { target: { value: maxInput.current.value } };
+            calcBuyDogeAmount(event); 
+        }
+      };
+      changeInput()
+    },[nowToken])
 
 
     //設置最大input
@@ -113,6 +118,7 @@ const foxMainPage = () => {
       setInputImg(newImg);
     }
 
+    //用ETH買Token
     const buyTokenWithETH = () => {
       contract.methods.buyWithEth()
         .send({ from: account, value: web3.utils.toWei(maxInput.current.value, 'ether') })
@@ -135,24 +141,14 @@ const foxMainPage = () => {
         });
     };
 
-    useEffect(()=>{
-      const changeInput = () => {
-        if (maxInput.current && calcDoge.current) {
-            const event = { target: { value: maxInput.current.value } }; // 使用現有的值
-            // maxInput.current.dispatchEvent(event);
-            calcBuyDogeAmount(event); 
-        }
-      };
-      changeInput()
-    },[nowToken])
 
+    
+    //購買代幣時先檢查授權
     const checkUSDTAllowance = () => {
-
       let transAmount = web3.utils.toWei(maxInput.current.value, 'Mwei');
       USDTcontract.methods.allowance(account,contractAddress).call()
       .then((res)=>{
         if (res < transAmount){
-          // console.log(transAmount , Number(res))
           USDTcontract.methods.approve(contractAddress,transAmount).send({from:account})
           .on('receipt', (receipt) => {
             if (receipt['status'] == 1) {
@@ -172,6 +168,7 @@ const foxMainPage = () => {
       })
     };
 
+    //用Token購買Token
     const buyTokenWithUSDT = (transAmount) => {
       contract.methods.buyWithUSDT(transAmount)
       .send({ from: account,value:0 })
@@ -194,22 +191,19 @@ const foxMainPage = () => {
       });
     }
     
+    //獲取USDTUSD價格
     const updateUSDTPrice =() => {
-
       let apiEndpoint = 'https://api.binance.us/api/v3/ticker/price?symbol=USDTUSD';
       fetch(apiEndpoint)
       .then(response => response.json())
       .then(data => {
-          // let price = parseFloat(data.price).toFixed(4);
-          // console.log(price);
           setCurrentUSDTPrice(parseFloat(data.price).toFixed(4))
       });
     }
     
     
     return (
-
-      <div className={classNames('flex mx-auto h-[94vh] bg-[url(/icon/mycry/mycryBG_noc.png)] bg-[length:100%_100%] bg-center bg-no-repeat justify-around')}>
+      <div className={classNames('flex mx-auto h-[94vh] bg-[url(/icon/mycry/mycryBG_noc.png)] bg-[length:100%_100%] bg-center bg-no-repeat justify-around relative')}>
         <div className='container w-[1270px]'>
           <div className={classNames('flex mx-auto w-full h-[94vh]  justify-between')}>
             <div className={classNames(' w-8/12 h-3/6 flex mt-10 flex-col ')}>
@@ -219,7 +213,6 @@ const foxMainPage = () => {
                 <div className={classNames(' w-full text-block font-medium flex items-center flex-col overflow-y-scroll ')}>
                   <div className={classNames(' w-10/12 text-block font-medium flex justify-center items-center flex-col')}>
                     <img src="/icon/mycry/mycrylogo.png" className={classNames(styles.main_left_block_img,'h-30 w-4/12')}></img>
-                    
                     <h1 className={classNames(styles.main_left_block_h1,"my-4")}><FormattedMessage defaultMessage="PlayDoge - 最佳 P2E Doge 夥伴遊戲" id="main.title"></FormattedMessage></h1>
                     <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="PlayDoge 是一款基於手機的賺取加密貨幣的遊戲，將標志性的 Doge 迷因轉化為類似電子寵物的虛擬寵物。重溫 90 年代的懷舊情懷！在預售中購買 $PLAY 代幣，享受經典的 2D 冒險並賺取更多加密貨幣！" id="main.body1"></FormattedMessage></p>
                     <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="PlayDoge 的故事" id="main.body2"></FormattedMessage></p>
@@ -254,14 +247,6 @@ const foxMainPage = () => {
                     <div className={'text-[14px]'}><FormattedMessage defaultMessage="秒" id="main.right.seconds"></FormattedMessage></div>
                   </div>
                 </div>
-                {/* <div className={'w-full px-6 pb-6 mt-2'}>
-                    <ProgressBarComponent numerator={25} denominator={100} />
-                </div>
-                <div className={classNames('pb-1 text-[15px]')}>
-                  <span>已籌集USDT: </span>
-                  <span>$1234</span>
-                  <span> / $5678</span>
-                </div> */}
                 <div className={classNames('pb-1 text-[14px]')}>
                   <span><FormattedMessage defaultMessage="你已購買的$PLAY" id="main.right.bought"></FormattedMessage></span>
                   <span> = {parseFloat(parseFloat(userTotalBalance).toFixed(8))}</span>
@@ -275,7 +260,6 @@ const foxMainPage = () => {
                   <div className={classNames('w-10/12 flex flex-col items-center')}>
                     <div className={classNames(styles.main_right_block_below_fir,'text-[14px] w-full h-10 flex flex-col justify-center items-center')}>
                       <p className=''>1 PLAY = 0.1 ETH = {currentUSDTPrice} USDT</p>
-                      {/* <p className=''>1 PLAY = 0.1 ETH</p> */}
                     </div>
                   </div>
                   <div className={classNames(' w-full flex justify-center justify-around mt-2')}>
@@ -291,8 +275,6 @@ const foxMainPage = () => {
                       </div>
                     </div>
                   )}
-                  
-
                   <div className={classNames('w-full flex justify-around mt-2')}>
                     <div className={classNames('w-full flex justify-around')}>
                       <div className={classNames('w-[150px] text-[12px] flex justify-between items-center')}>
@@ -343,7 +325,6 @@ const foxMainPage = () => {
                               <FormattedMessage defaultMessage="質押" id="main.right.stake"></FormattedMessage>
                             </button>
                           }
-                          
                         </div>
                         <div className={classNames('w-full flex justify-center items-center')}>
                           <button onClick={disconnect} className={classNames('bg-[#ad00ff] w-6/12 text-white border-solid border-black border-t border-l border-r-[3px] border-b-2 rounded-lg h-12 mt-8')}>
@@ -356,13 +337,13 @@ const foxMainPage = () => {
                         <FormattedMessage defaultMessage="連接錢包" id="main.right.connect"></FormattedMessage>
                       </button>
                     }
-                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <img src="/icon/mycry/chicken.gif" className="absolute bottom-[10rem] left-[24rem]" /> 
       </div>
     );
 }

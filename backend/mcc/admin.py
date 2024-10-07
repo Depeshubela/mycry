@@ -5,13 +5,6 @@ admin.site.site_header = 'MCC後檯管理'
 admin.site.site_title = 'MCC後檯管理'
 admin.site.index_title = 'MCC後檯管理'
 
-# admin.site.register(UserData)
-# admin.site.register(UserPurchaseHistory)
-# admin.site.register(UserSetStakeHistory)
-# admin.site.register(UserWithdrawStakeHistory)
-# admin.site.register(UserAddress)
-# admin.site.register(ConfirmString)
-
 
 @admin.register(UserData)
 class UserDataAdmin(admin.ModelAdmin):

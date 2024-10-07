@@ -40,7 +40,7 @@ const backStakePage = () => {
       },[user])
     
     return (
-      <div className={classNames('flex mx-auto bg-[url(/icon/mycry/mycryBG.png)] bg-[length:100%_100%] bg-center bg-no-repeat h-[94vh] justify-around')}>
+      <div className={classNames('flex mx-auto bg-[url(/icon/mycry/mycryBG.png)] bg-[length:100%_100%] bg-center bg-no-repeat h-[94vh] justify-around relative')}>
         <div className={classNames('flex mx-auto container w-[1270px] h-[60%] justify-evenly flex-col')}>
           <div className={classNames('flex flex-row w-full')}>
             <div className='w-[55%] '>
@@ -94,12 +94,6 @@ const backStakePage = () => {
                 <span className='text-[12px]'><img className='h-auto w-auto inline-block' src='/icon/ani-arrow.svg'></img><FormattedMessage defaultMessage="５年以後４０％" id="stake.fiveYear"></FormattedMessage></span>
               </div>
             </div>
-            {/* <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
-              <div>
-                <span className='mb-1'>當前獎勵</span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>0<span className='text-[12px] ml-2'>Per ETH Block</span></h2>
-              </div>
-            </div> */}
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="總獎勵" id="stake.totalRewards"></FormattedMessage></span>
@@ -108,6 +102,7 @@ const backStakePage = () => {
             </div>
           </div>
         </div>
+        <img src="/icon/mycry/fox.gif" className="absolute bottom-[7rem] right-[8rem] transform scale-x-[-1]" /> 
       </div>
     );
 }

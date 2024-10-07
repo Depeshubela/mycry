@@ -15,8 +15,6 @@ import os
 from pathlib import Path
 import environ
 
-
-
 #找env檔案
 ROOT_DIR = (
     environ.Path(__file__) - 2
@@ -25,23 +23,14 @@ ROOT_DIR = (
 env = environ.Env()
 
 environ.Env.read_env(str(ROOT_DIR.path(".env")))
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "django-insecure-qnmjrt$99!p(=@y)-k&65+phb3)fwdd#q^#ot@xbc@v66*%qg7"
 SECRET_KEY = "django-insecure-qnmjrt$99!p(=@y)-k&65+phb3)fwdd#q^#ot@xbc@v66*%qg7"
-# SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'simpleui',
@@ -68,6 +57,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
@@ -94,31 +84,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-
 # Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     "default": {
-#         # "ENGINE": "django.db.backends.sqlite3",
-#         "ENGINE": "django_prometheus.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 DATABASES = {
-    'default': {
-        'ENGINE': "django.db.backends.postgresql",
-        'NAME': "mycry",
-        'USER': "postgres",
-        'PASSWORD': "joy50923",
-        'HOST': "mycry.cjmus6oeqzeh.ap-northeast-1.rds.amazonaws.com",
-        'PORT': "5432",
-    },
+    "default": {
+        # "ENGINE": "django.db.backends.sqlite3",
+        "ENGINE": "django_prometheus.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+# DATABASES = {
+#     'default': {
+#         'ENGINE': "django.db.backends.postgresql",
+#         'NAME': "mycry",
+#         'USER': "postgres",
+#         'PASSWORD': "joy50923",
+#         'HOST': "mycry.cjmus6oeqzeh.ap-northeast-1.rds.amazonaws.com",
+#         'PORT': "5432",
+#     },
+# }
 
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -136,8 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = "zh-Hant"
 
 TIME_ZONE = "Asia/Taipei"
@@ -148,19 +132,18 @@ USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL='/static/'
+
 STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static/')]
+
 STATIC_ROOT='./static/static/'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 #CORS
 CORS_ALLOW_ALL_ORIGINS = True
+
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:5173",
 #     "http://127.0.0.1:5173",
@@ -180,6 +163,7 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = [
@@ -198,7 +182,6 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
-
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,
     "VERIFYING_KEY": "",
@@ -207,19 +190,15 @@ SIMPLE_JWT = {
     "JSON_ENCODER": None,
     "JWK_URL": None,
     "LEEWAY": 0,
-
     "AUTH_HEADER_TYPES": ("Bearer",),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "email",
     "USER_ID_CLAIM": "email",
     "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
-
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
     "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
-
     "JTI_CLAIM": "jti",
-
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
@@ -237,11 +216,15 @@ REST_FRAMEWORK = {
 
 #寄信
 OUTSIDE_EMAIL_BACKEND = env.str('OUTSIDE_EMAIL_BACKEND')
+
 OUTSIDE_EMAIL_HOST = env.str('OUTSIDE_EMAIL_HOST')
+
 OUTSIDE_EMAIL_PORT = env.int('OUTSIDE_EMAIL_PORT')
 
 OUTSIDE_EMAIL_HOST_USER = env.str('OUTSIDE_EMAIL_HOST_USER')
+
 OUTSIDE_EMAIL_HOST_PASSWORD = env.str('OUTSIDE_EMAIL_HOST_PASSWORD')
+
 OUTSIDE_EMAIL_USE_SSL = env.bool('OUTSIDE_EMAIL_USE_SSL')
 
 #網域
@@ -277,25 +260,23 @@ CACHES = {
 }
 
 #SimpleUI
-# -----------------------------------------------------------------
-
 SIMPLEUI_LOGO = STATIC_URL + 'logo.png' 
+
 SIMPLEUI_HOME_INFO = False 
+
 SIMPLEUI_ANALYSIS = False 
+
 SIMPLEUI_ANALYSIS = True
+
 SIMPLEUI_INDEX = '#'
-# 隐藏首页的快捷操作和最近动作
+
+# 隱藏首頁的快捷與最近操作
 # SIMPLEUI_HOME_QUICK = False 
 # SIMPLEUI_HOME_ACTION = False
 
-# 设置右上角Home图标跳转链接，会以另外一个窗口打开
+# 設置右上HOME連結
 # SIMPLEUI_INDEX = 'https://www.baidu.com'
-
 # SIMPLEUI_DEFAULT_THEME = 'purple.css'
 
-
-# -----------------------------------------------------------------
-
 #PROMETHEUS
-# PROMETHEUS_EXPORT_MIGRATIONS = env.bool("PROMETHEUS_EXPORT_MIGRATIONS", True)
 PROMETHEUS_EXPORT_MIGRATIONS = False

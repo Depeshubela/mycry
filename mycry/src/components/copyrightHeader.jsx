@@ -15,7 +15,6 @@ const copyrightHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
         }
     }, [setHeaderHeight]);
     
-
     useEffect(() => {
         changeLang()
       },[lang])
@@ -32,29 +31,21 @@ const copyrightHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
                 <div className="flex items-center w-[30%] gap-2">
                     <div to={ROUTES.MCC_FOX_MAIN} className="flex items-center w-full">
                         <img className='w-full' src='/icon/logo.svg' ></img></div>
-                    
                     <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full">
                             <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>小狐狸模式</p></Link>
-                    
                     <Link to={ROUTES.MCC_BACK_MAIN} className="flex w-1/2 text-center h-full">
                         <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>會員模式</p></Link>
-
-                        
-                    
                 </div>
                 <div className="flex items-center gap-2">
-                    
                     <select className='p-1 border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none h-full' value={lang} onChange={(e) => {setLang(e.target.value)}}>
                         <option value="en">English</option>
                         <option value="zh-TW">繁體中文</option>
                         <option value="jp">日本語</option>
                     </select>
-                    
                 </div>
             </div>
         </div>
 
     );
 };
-
 export default copyrightHeader;

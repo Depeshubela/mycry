@@ -9,33 +9,26 @@ const AuthContext = createContext()
 export default AuthContext;
 
 export const AuthProvider = ({children}) => {
-
     let [user, setUser] = useState(() => (localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null))
     let [authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null))
-
     const [error, setError] = useState(null);
-    // console.log('auth')
     const navigate = useNavigate()
+
     let loginUser = async (e) => {
         e.preventDefault()
-        // console.log("login")
         try {
-            
             const response = await apiInstance.post('token/', {
                 email: e.target.loginEmail.value,
                 password: e.target.loginPassword.value
             });
             const data = response.data;
-            // console.log(response)
-            
+
             if (data) {
-               
                 localStorage.setItem('authTokens', JSON.stringify(data));
                 setAuthTokens(data);
                 setUser(jwtDecode(data.access));
                 setError(null);
                 navigate(ROUTES.MCC_BACK_MAIN);
-                
             } else {
                 setError('登入失敗：請確認帳號或密碼是否正確'); 
             }
@@ -59,8 +52,6 @@ export const AuthProvider = ({children}) => {
     };
 
     const updateToken = async () => {
-        // console.log("update")
-
         try{
             const response = await apiInstance.post('token/refresh/', {
                 refresh: authTokens?.refresh
@@ -69,11 +60,8 @@ export const AuthProvider = ({children}) => {
                        'Content-Type': 'application/json'
                    }
                });
-       
                const data = response.data;
-       
                if (response.status === 200) {
-                    
                    setAuthTokens(data)
                    setUser(jwtDecode(data.access))
                    localStorage.setItem('authTokens',JSON.stringify(data))
@@ -86,9 +74,7 @@ export const AuthProvider = ({children}) => {
             if(authTokens){
                 logoutUser()
             }
-
-        }
-        
+        }  
     }
 
     let contextData = {
@@ -101,6 +87,7 @@ export const AuthProvider = ({children}) => {
         updateToken
     }
 
+    //定期refresh token
     useEffect(()=>{
         if(authTokens){
             const REFRESH_INTERVAL = 1000 * 300
