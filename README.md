@@ -2,7 +2,7 @@
 本專案一切圖片素材皆來源於Google，排版設計模仿自[PLAYDOGE](https://playdoge.io/zh-hant#home)，僅於特定時間公開用於本人程式學習及求職使用，於特定時間後會關閉並禁止除本人外所有用戶訪問，無任何散播與營利之目的。
 
 # 專案介紹
-本專案目標為實現網站與區塊鏈合約之交互使用，於專案內分為
+本專案目標為實現網站與區塊鏈合約之交互使用，於專案內分為兩種模式
 ### 會員模式
 
 用戶需註冊並登入後才可於合約進行合約互動，且錢包由網站管理員(後端資料庫)統一保管
@@ -15,9 +15,9 @@
 
 其他細部功能介紹待下述
 
-## 使用工具
+## 主要使用工具
 ### 網頁
-* 前端:React (Vite、tailwindcss)
+* 前端:React (Vite、tailwindcss、Metamask SDK)
 
 * 後端:Python-Django (PostgreSQL、Redis、Prometheus、Grafana)
 
@@ -26,3 +26,15 @@
 開發於Windows
 
 運行於AWS EC2 Linux Ubuntu Docker容器中
+
+## 會員模式功能介紹
+
+
+
+
+
+
+
+
+
+## 小狐狸模式功能介紹
