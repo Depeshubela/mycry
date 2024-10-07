@@ -9,8 +9,6 @@ services:
     command: sh entrypoint.sh
   frontend:
     image: node:18.18
-    # ports:
-    #   - "5173:5173"
     command: sh entrypoint.sh
     working_dir: /mycry
     volumes:
@@ -20,8 +18,8 @@ services:
     ports:
       - 80:80
     volumes:
+      - ./nginx/SSL/CC34E3E5881FA4EE002C4204A376CBB0.txt:/home/.well-known/pki-validation/CC34E3E5881FA4EE002C4204A376CBB0.txt
       - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf
-      # - ./mycry/dist:/var/www/mycry
       - ./mycry/dist:/usr/share/nginx/html
     depends_on:
       - backend
