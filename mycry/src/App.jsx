@@ -52,7 +52,7 @@ const BackRoutes = ({ setHeaderHeight, setLocale }) => {
             <Route path='stake' element={<PrivateRoute><BackHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><BackStakePage/></PrivateRoute>} />
             <Route path='main' element={<PrivateRoute><BackHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><BackMainPage/></PrivateRoute>} />
             <Route path='register' element={<><BackRegister/></>} />
-            <Route path='registerrConfirm' element={<><BackRegisterConfirm/></>} />
+            <Route path='registerConfirm' element={<><BackRegisterConfirm/></>} />
             <Route path='*' element={<Page404 />} />
         </Routes>
       </APIContextProvider>

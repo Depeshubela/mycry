@@ -24,10 +24,14 @@ function backendRegisterConfirm() {
                 urls : v
             });
             const data = response.data;
-            // console.log(data)
             setUserEmail(data['registerEmail'])
         }catch(e){
-            console.log(e)
+            if (error.response && error.response.status === 404) {
+                navigate('/404');
+            } else {
+                // 處理其他錯誤
+                console.error('Error occurred:', error);
+            }
         }
     }
     getRegisterEmail()

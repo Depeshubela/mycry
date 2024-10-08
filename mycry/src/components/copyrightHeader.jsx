@@ -30,7 +30,7 @@ const copyrightHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
             <div className='container w-[1270px] mx-auto flex justify-between p-2'>
                 <div className="flex items-center w-[30%] gap-2">
                     <div to={ROUTES.MCC_FOX_MAIN} className="flex items-center w-full">
-                        <img className='w-full' src='/icon/logo.svg' ></img></div>
+                        <img className='w-full' src='/icon/mycry/mycryCrypto.png' ></img></div>
                     <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full">
                             <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>小狐狸模式</p></Link>
                     <Link to={ROUTES.MCC_BACK_MAIN} className="flex w-1/2 text-center h-full">

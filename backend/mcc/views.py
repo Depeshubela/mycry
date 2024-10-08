@@ -10,6 +10,8 @@ from django.conf import settings
 from rest_framework.views import APIView
 from django.core.cache import cache
 
+from django.utils import timezone
+from datetime import timedelta
 import threading,pytz,datetime,requests,traceback,json
 from .functions import *
 from .createWallet import createWallet
@@ -57,7 +59,8 @@ class UserRegisterAPIView(APIView):
         歡迎您註冊MyCryCoin！<br><br>
         請點選以下驗證連結，驗證Email帳號以完成註冊程序。<br><br>
         您也可以複製下方網址到瀏覽器中開啟進行驗證</a><br><br>
-        <a style="color:#0070C0" href="http://{}/mcc/backend/registerConfirm/?code={}&v={}">http://{}/mcc/backend/registerConfirm/?code={}&v={}</a><br><br><br><br>
+        <a style="color:#0070C0" href="https://{}/mcc/backend/registerConfirm/?code={}&v={}">http://{}/mcc/backend/registerConfirm/?code={}&v={}</a><br><br>
+        <a style="color:#FF0000">請注意：信件只有1分鐘有效期，請注意註冊時間。<br><br><br><br><br><br>
         <a style="color:#FF0000">請注意：此郵件是系統自動傳送，請勿直接回覆！<br>
         </body>
         '''.format(data['email'],settings.PROJECT_URL, code, AES_ECB().encrypt(settings.AES_ECB_KEY,data['email']), settings.PROJECT_URL, code ,AES_ECB().encrypt(settings.AES_ECB_KEY,data['email']))
@@ -74,7 +77,12 @@ class UserRegisterConfirmAPIView(APIView):
     )
     def post(self, request):
         data = {"registerEmail": AES_ECB().decrypt(settings.AES_ECB_KEY,request.data['urls'])}
-        return Response(data)
+        user = ConfirmString.objects.filter(email = data['registerEmail']).first()
+        if user and timezone.now() - user.createTime <= timedelta(minutes=1):
+            return Response(data)
+        else:
+            return Response({"detail": "Time Out"}, status=404)
+
     
 
 class UserRegisterCreateAPIView(APIView):
