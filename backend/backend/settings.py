@@ -85,24 +85,24 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
-DATABASES = {
-    "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        "ENGINE": "django_prometheus.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': "django.db.backends.postgresql",
-#         'NAME': "mycry",
-#         'USER': "postgres",
-#         'PASSWORD': "joy50923",
-#         'HOST': "mycry.cjmus6oeqzeh.ap-northeast-1.rds.amazonaws.com",
-#         'PORT': "5432",
-#     },
+#     "default": {
+#         # "ENGINE": "django.db.backends.sqlite3",
+#         "ENGINE": "django_prometheus.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': "django.db.backends.postgresql",
+        'NAME': "mycry",
+        'USER': "postgres",
+        'PASSWORD': "joy50923",
+        'HOST': "mycry.cjmus6oeqzeh.ap-northeast-1.rds.amazonaws.com",
+        'PORT': "5432",
+    },
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
