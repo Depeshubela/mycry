@@ -203,22 +203,22 @@ const foxMainPage = () => {
     
     
     return (
-      <div className={classNames('flex mx-auto h-[94vh] bg-[url(/icon/mycry/mycryBG_noc.png)] bg-[length:100%_100%] bg-center bg-no-repeat justify-around relative')}>
+      <div className={classNames('flex mx-auto h-[93vh] bg-[url(/icon/mycry/mycryBG_noc.png)] bg-[length:100%_100%] bg-center bg-no-repeat justify-around relative')}>
         <div className='container w-[1270px]'>
           <div className={classNames('flex mx-auto w-full h-[94vh]  justify-between')}>
             <div className={classNames(' w-8/12 h-3/6 flex mt-10 flex-col ')}>
               <div className={classNames(styles.main_left_block_bg,'w-11/12 h-full border-4 border-black flex items-center flex-col')}>
-                <p className={classNames(styles.main_left_block_fir,'h-10 w-full text-white flex justify-center items-center')}>PlayDoge.exe</p>
+                <p className={classNames(styles.main_left_block_fir,'h-10 w-full text-white flex justify-center items-center')}>MyCry.exe</p>
                 <p className={classNames(styles.main_left_block_sec,'h-10 w-full text-block font-semibold flex justify-center items-center')}>Welcome to</p>
                 <div className={classNames(' w-full text-block font-medium flex items-center flex-col overflow-y-scroll ')}>
                   <div className={classNames(' w-10/12 text-block font-medium flex justify-center items-center flex-col')}>
                     <img src="/icon/mycry/mycrylogo.png" className={classNames(styles.main_left_block_img,'h-30 w-4/12')}></img>
-                    <h1 className={classNames(styles.main_left_block_h1,"my-4")}><FormattedMessage defaultMessage="PlayDoge - 最佳 P2E Doge 夥伴遊戲" id="main.title"></FormattedMessage></h1>
-                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="PlayDoge 是一款基於手機的賺取加密貨幣的遊戲，將標志性的 Doge 迷因轉化為類似電子寵物的虛擬寵物。重溫 90 年代的懷舊情懷！在預售中購買 $PLAY 代幣，享受經典的 2D 冒險並賺取更多加密貨幣！" id="main.body1"></FormattedMessage></p>
-                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="PlayDoge 的故事" id="main.body2"></FormattedMessage></p>
-                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="在2024年，加密貨幣世界被一個神秘事件震撼：所有深受喜愛的Doge——標志性的加密貨幣迷因——突然消失得無影無蹤。恐慌在Doge社區中蔓延，直到有一天，一位滿懷希望的Doge主人在一個老舊、廢棄的遊樂場里發現了一台老式街機。這個遊戲名為“PlayDoge”，閃爍著懷舊的魅力。" id="main.body3"></FormattedMessage></p>
-                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="PlayDoge - 最佳 P2E Doge 夥伴遊戲" id="main.body4"></FormattedMessage></p>
-                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="PlayDoge - 最佳 P2E Doge 夥伴遊戲" id="main.body5"></FormattedMessage></p>
+                    <h1 className={classNames(styles.main_left_block_h1,"my-4")}><FormattedMessage defaultMessage="MycryCoin - 最佳購買選擇" id="main.title"></FormattedMessage></h1>
+                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="MycryCoin 是一款基於手機的賺取加密貨幣的貨幣，將突破性的網路遊戲迷因轉化為現代支付貨幣。在預售中購買 $MCC 代幣，享受最強的支付體驗及質押以賺取更多加密貨幣！" id="main.body1"></FormattedMessage></p>
+                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="MyCryCoin 的故事" id="main.body2"></FormattedMessage></p>
+                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="在2009年，我的小世界的眾多玩家被一個神秘NPC所震撼：一位原型是豬的物件陰錯陽差變成了所有玩家的夢魘。恐慌在社區中蔓延，直到有一天，一位實力堅強的玩家在一個老舊、廢棄的代碼裡發現了一行神秘計畫，這個計畫名為“MyCry”，閃爍著神秘的魅力。" id="main.body3"></FormattedMessage></p>
+                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="購買MyCryCoin" id="main.body4"></FormattedMessage></p>
+                    <p className={classNames(styles.main_left_block_text,'text-center mb-4')}><FormattedMessage defaultMessage="通過購買MyCryCoin與你的眾多夥伴一起在我的小世界感受膽戰心驚的爆炸。購買$MCC代幣邊玩邊賺回報！" id="main.body5"></FormattedMessage></p>
                   </div>
                 </div>
               </div>
@@ -248,18 +248,18 @@ const foxMainPage = () => {
                   </div>
                 </div>
                 <div className={classNames('pb-1 text-[14px]')}>
-                  <span><FormattedMessage defaultMessage="你已購買的$PLAY" id="main.right.bought"></FormattedMessage></span>
+                  <span><FormattedMessage defaultMessage="你已購買的$MCC" id="main.right.bought"></FormattedMessage></span>
                   <span> = {parseFloat(parseFloat(userTotalBalance).toFixed(8))}</span>
                 </div>
                 <div className={classNames('pb-1 text-base text-[13px]')}>
-                  <span><FormattedMessage defaultMessage="你可質押的的$PLAY" id="main.right.canStake"></FormattedMessage></span>
+                  <span><FormattedMessage defaultMessage="你可質押的的$MCC" id="main.right.canStake"></FormattedMessage></span>
                   <span> = {parseFloat(parseFloat(userNowBalance).toFixed(8))}</span>
                 </div>
 
                 <div className={classNames(' w-full flex flex-col items-center h-full')}>
                   <div className={classNames('w-10/12 flex flex-col items-center')}>
                     <div className={classNames(styles.main_right_block_below_fir,'text-[14px] w-full h-10 flex flex-col justify-center items-center')}>
-                      <p className=''>1 PLAY = 0.1 ETH = {currentUSDTPrice} USDT</p>
+                      <p className=''>1 MCC = 0.1 ETH = {currentUSDTPrice} USDT</p>
                     </div>
                   </div>
                   <div className={classNames(' w-full flex justify-center justify-around mt-2')}>
@@ -282,7 +282,7 @@ const foxMainPage = () => {
                         <button onClick={()=>setMaxInput()}><FormattedMessage defaultMessage="最大" id="main.right.max"></FormattedMessage></button>
                       </div>
                       <div className={classNames('w-[150px] text-[12px] flex justify-between')}>
-                        <p><FormattedMessage defaultMessage="你預計收到的$PLAY" id="main.right.receive"></FormattedMessage></p>
+                        <p><FormattedMessage defaultMessage="你預計收到的$MCC" id="main.right.receive"></FormattedMessage></p>
                       </div>
                     </div>
                   </div>

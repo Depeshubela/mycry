@@ -8,7 +8,7 @@ const Page404 = () => {
             <div className="flex flex-col text-[40px] text-center">
                 <div className="">
                     <p>404 Page Not Found!</p>
-                    <p>立刻加入MyCry</p>
+                    <p>立刻加入MyCryCoin!</p>
                 </div>
                 <div className="flex flex-row justify-center gap-12 ">
                     <a href={window.location.origin + '/mcc/backend/login'}><p className="text-[#0000EE]">會員模式</p></a>   

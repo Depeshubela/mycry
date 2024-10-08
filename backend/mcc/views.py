@@ -54,7 +54,7 @@ class UserRegisterAPIView(APIView):
         html_content = '''
         <body style="font-family:DFKai-sb;font-size: 20px;">
         <a style="color:#0070C0">您好{}！<br><br>
-        歡迎您註冊PLAYDOGE！<br><br>
+        歡迎您註冊MyCryCoin！<br><br>
         請點選以下驗證連結，驗證Email帳號以完成註冊程序。<br><br>
         您也可以複製下方網址到瀏覽器中開啟進行驗證</a><br><br>
         <a style="color:#0070C0" href="http://{}/mcc/backend/registerConfirm/?code={}&v={}">http://{}/mcc/backend/registerConfirm/?code={}&v={}</a><br><br><br><br>

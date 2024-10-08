@@ -167,7 +167,7 @@ export const APIContextProvider = ({ children }) => {
 
       const playAmount = buyAmount * 10;
       const htmlMessage = intl.formatMessage({
-        id: 'alert.html.buyTokenWithETH.message',defaultMessage: '您即將花費 {buyAmount} E 購買 {playAmount} $PLAY'},
+        id: 'alert.html.buyTokenWithETH.message',defaultMessage: '您即將花費 {buyAmount} E 購買 {playAmount} $MCC'},
         {buyAmount,playAmount}
       );
       const warningMessage = intl.formatMessage({
@@ -193,7 +193,7 @@ export const APIContextProvider = ({ children }) => {
             swalWithReact.fire({
               title: intl.formatMessage({ id: 'alert.title.transing', defaultMessage: '交易進行中，請稍後' }),
               html: "",
-              imageUrl: '/icon/playdogelogo.png',
+              imageUrl: '/icon/mycry/mycrylogo.png',
               imageHeight: 188,
               imageWidth: 488,
               allowOutsideClick: false,
@@ -244,7 +244,7 @@ export const APIContextProvider = ({ children }) => {
       var buyAmount = maxInput.current.value;
       const playAmount = parseFloat(buyAmount / currentUSDTPrice).toFixed(6)
       const htmlMessage = intl.formatMessage({
-        id: 'alert.html.buyTokenWithUSDT.message',defaultMessage: '您即將花費 {buyAmount} E 購買 {playAmount} $PLAY'},
+        id: 'alert.html.buyTokenWithUSDT.message',defaultMessage: '您即將花費 {buyAmount} E 購買 {playAmount} $MCC'},
         {buyAmount,playAmount}
       );
       const warningMessage = intl.formatMessage({
@@ -270,7 +270,7 @@ export const APIContextProvider = ({ children }) => {
             swalWithReact.fire({
               title: intl.formatMessage({ id: 'alert.title.transing', defaultMessage: '交易進行中，請稍後' }),
               html: "",
-              imageUrl: '/icon/playdogelogo.png',
+              imageUrl: '/icon/mycry/mycrylogo.png',
               imageHeight: 188,
               imageWidth: 488,
               allowOutsideClick: false,
@@ -351,8 +351,8 @@ export const APIContextProvider = ({ children }) => {
     const initStake = (stakeValue) => {
       if(stakeValue){
         swalWithReact.fire({
-          title: intl.formatMessage({ id: 'alert.title.stakeCheck', defaultMessage: `您即將質押${stakeValue}顆$PLAY` },{stakeValue}),
-          imageUrl: '/icon/playdogelogo.png',
+          title: intl.formatMessage({ id: 'alert.title.stakeCheck', defaultMessage: `您即將質押${stakeValue}顆$MCC` },{stakeValue}),
+          imageUrl: '/icon/mycry/mycrylogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',
@@ -367,7 +367,7 @@ export const APIContextProvider = ({ children }) => {
               swalWithReact.fire({
                 title: intl.formatMessage({ id: 'alert.title.transing', defaultMessage: '交易進行中，請稍後' }),
                 html: "",
-                imageUrl: '/icon/playdogelogo.png',
+                imageUrl: '/icon/mycry/mycrylogo.png',
                 imageHeight: 188,
                 imageWidth: 488,
                 allowOutsideClick: false,
@@ -407,7 +407,7 @@ export const APIContextProvider = ({ children }) => {
       }else{
         swalWithReact.fire({
           title: intl.formatMessage({ id: 'alert.title.stakeAmountError', defaultMessage: '請輸入質押數量' }),
-          imageUrl: '/icon/playdogelogo.png',
+          imageUrl: '/icon/mycry/mycrylogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',
@@ -421,8 +421,8 @@ export const APIContextProvider = ({ children }) => {
     const withdrawStake = async() => {
       if (userStaked != 0){
         swalWithReact.fire({
-          title: intl.formatMessage({ id: 'alert.title.withdrawStake', defaultMessage: `您有${userStaked}顆$PLAY質押可提領` },{userStaked:parseFloat(userStaked.toFixed(6))}),
-          imageUrl: '/icon/playdogelogo.png',
+          title: intl.formatMessage({ id: 'alert.title.withdrawStake', defaultMessage: `您有${userStaked}顆$MCC質押可提領` },{userStaked:parseFloat(userStaked.toFixed(6))}),
+          imageUrl: '/icon/mycry/mycrylogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',
@@ -437,7 +437,7 @@ export const APIContextProvider = ({ children }) => {
               swalWithReact.fire({
                 title: intl.formatMessage({ id: 'alert.title.transing', defaultMessage: '交易進行中，請稍後' }),
                 html: "",
-                imageUrl: '/icon/playdogelogo.png',
+                imageUrl: '/icon/mycry/mycrylogo.png',
                 imageHeight: 188,
                 imageWidth: 488,
                 allowOutsideClick: false,
@@ -476,8 +476,8 @@ export const APIContextProvider = ({ children }) => {
         })
       }else{
         swalWithReact.fire({
-          title: intl.formatMessage({ id: 'alert.title.withdrawError', defaultMessage: '您沒有可提領的$PLAY' }),
-          imageUrl: '/icon/playdogelogo.png',
+          title: intl.formatMessage({ id: 'alert.title.withdrawError', defaultMessage: '您沒有可提領的$MCC' }),
+          imageUrl: '/icon/mycry/mycrylogo.png',
           imageHeight: 188,
           imageWidth: 188,
           background: '#FFF5E9',

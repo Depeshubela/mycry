@@ -24,7 +24,7 @@ function backendRegister() {
             <div className='h-full bg-[#f9f5ef]'>
                 <div className='h-[50%] flex items-center'>
                     <div className='w-full flex justify-center'>
-                        <img src='/icon/playdogelogo.png'></img>
+                        <img src='/icon/mycry/mycrylogo.png'></img>
                     </div>
                 </div>
                 
