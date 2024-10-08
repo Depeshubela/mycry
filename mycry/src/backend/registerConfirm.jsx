@@ -109,9 +109,7 @@ function backendRegisterConfirm() {
             inputSec.current.classList.remove('border-red-500')
             inputSec.current.setCustomValidity('');
             inputSec.current.reportValidity();
-        }
-        // console.log(inputSec.current)
-    }
+        }    }
     
 
     return (
@@ -132,7 +130,6 @@ function backendRegisterConfirm() {
                         <div className={classNames('container flex flex-col absolute inset-x-0 m-auto justify-center items-center bottom-[35%]')}>
                             <div className='flex w-full justify-center items-center '>
                                 <div className='flex w-full justify-center items-center '>
-                                    {/* <label htmlFor='userEmail' className={classNames('font-["unset"] text-[30px] text-[#49cb71] select-none')}>{}</label> */}
                                     <input 
                                         
                                         name='userEmail' 
@@ -189,8 +186,6 @@ function backendRegisterConfirm() {
                                 <div className='h-full w-2/12'>
                                         <button className={classNames('mr-12 border-0 outline-0 h-full w-full bg-[#ad00ff] text-white border-solid border-black border-t border-l border-r-[3px] border-b-2 rounded-lg')} type='submit'>送出</button>
                                 </div>
-                                
-
                             </div>
                         </div>
 

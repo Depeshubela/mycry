@@ -8,7 +8,7 @@ function backendRegister() {
     const registerEmail = async (e) => {
         e.preventDefault()
         try{
-            const response = await apiInstance.post('api/register/', {
+            const response = await apiInstance.post('register/', {
                 email: e.target.registerEmail.value,
             });
             const data = response.data;
@@ -44,14 +44,11 @@ function backendRegister() {
                                         size="30" 
                                         className={classNames('outline-none border-b border-[#49cb71] bg-[#f9f5ef]')}/>
                                 </div>
-                                
-                                {/* <div className='w-[50%]'> */}
                                 <div className='flex w-full justify-center items-center '>
                                     <div className='h-full'>
                                             <button className={classNames('mr-12 border-0 outline-0 h-full w-full bg-[#ad00ff] text-white border-solid border-black border-t border-l border-r-[3px] border-b-2 rounded-lg')} type='submit'>送出</button>
                                     </div>
                                 </div>
-                                {/* </div> */}
                             </div>
                         </div>
 

@@ -40,7 +40,7 @@ const backStakePage = () => {
       },[user])
     
     return (
-      <div className={classNames('flex mx-auto bg-[url(/icon/mycry/mycryBG.png)] bg-[length:100%_100%] bg-center bg-no-repeat h-[93vh] justify-around relative')}>
+      <div className={classNames('flex mx-auto bg-[url(/icon/mycry/mycryBG.png)] bg-[length:100%_100%] bg-center bg-no-repeat h-[94vh] justify-around relative')}>
         <div className={classNames('flex mx-auto container w-[1270px] h-[60%] justify-evenly flex-col')}>
           <div className={classNames('flex flex-row w-full')}>
             <div className='w-[55%] '>

@@ -36,6 +36,7 @@ const FoxRoutes = ({ setHeaderHeight, setLocale }) => {
           <Routes>
               <Route path='main' element={<><FoxHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><FoxMainPage/></>} />
               <Route path='stake' element={<><FoxHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><FoxStakePage/></>} />
+              <Route path='*' element={<Page404 />} />
           </Routes>
       </MyMetaMaskProvider>
     </MetaMaskProvider>
@@ -52,6 +53,7 @@ const BackRoutes = ({ setHeaderHeight, setLocale }) => {
             <Route path='main' element={<PrivateRoute><BackHeader showHeader={true} setHeaderHeight={setHeaderHeight} setLocale={setLocale}/><BackMainPage/></PrivateRoute>} />
             <Route path='register' element={<><BackRegister/></>} />
             <Route path='registerrConfirm' element={<><BackRegisterConfirm/></>} />
+            <Route path='*' element={<Page404 />} />
         </Routes>
       </APIContextProvider>
     </AuthProvider>
