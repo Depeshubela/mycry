@@ -109,7 +109,7 @@ export const APIContextProvider = ({ children }) => {
 
       setUserAddress(data['datas']['ethAddress']);
       setUserETHBalance(parseFloat(parseFloat(data['datas']['ethBalance']).toFixed(6)));
-      setUserUSDTBalance(parseFloat(parseFloat(data['datas']['usdtBalance']).toFixed(6)));
+      setUserUSDTBalance(parseFloat(parseFloat(data['datas']['usdtBalance']).toFixed(4)));
       setUserTotalBalance(parseFloat((new Decimal(data['datas']['staked']).add(new Decimal(data['datas']['tokenBalance']))).toFixed(6)));
       setUserNowBalance(parseFloat(parseFloat(data['datas']['tokenBalance']).toFixed(6)));
       setUserStaked(parseFloat(parseFloat(data['datas']['staked']).toFixed(6)));
@@ -195,7 +195,7 @@ export const APIContextProvider = ({ children }) => {
               html: "",
               imageUrl: '/icon/mycry/mycrylogo.png',
               imageHeight: 188,
-              imageWidth: 488,
+              imageWidth: 188,
               allowOutsideClick: false,
               allowEscapeKey: false,
             });
@@ -272,16 +272,16 @@ export const APIContextProvider = ({ children }) => {
               html: "",
               imageUrl: '/icon/mycry/mycrylogo.png',
               imageHeight: 188,
-              imageWidth: 488,
+              imageWidth: 188,
               allowOutsideClick: false,
               allowEscapeKey: false,
             });
             swalWithReact.showLoading();
             try{
-              const response = await apiAuthInstance.post('buyTokenWithUSDT/',{
-                payAmount:buyAmount,
-                payToken:nowToken
-              });
+              // const response = await apiAuthInstance.post('buyTokenWithUSDT/',{
+              //   payAmount:buyAmount,
+              //   payToken:nowToken
+              // });
               const data = response.data;
               var title,icon,html;
               if(data){
@@ -369,7 +369,7 @@ export const APIContextProvider = ({ children }) => {
                 html: "",
                 imageUrl: '/icon/mycry/mycrylogo.png',
                 imageHeight: 188,
-                imageWidth: 488,
+                imageWidth: 188,
                 allowOutsideClick: false,
                 allowEscapeKey: false,
               });
@@ -439,7 +439,7 @@ export const APIContextProvider = ({ children }) => {
                 html: "",
                 imageUrl: '/icon/mycry/mycrylogo.png',
                 imageHeight: 188,
-                imageWidth: 488,
+                imageWidth: 188,
                 allowOutsideClick: false,
                 allowEscapeKey: false,
               });

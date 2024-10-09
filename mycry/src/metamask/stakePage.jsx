@@ -216,7 +216,7 @@ const foxStakePage = () => {
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="已質押中" id="stake.staked"></FormattedMessage></span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{userStaked ? Number((userStaked).toFixed(4)) : 0}<span className='text-[12px] ml-2'>$MCC</span></h2>
+                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{userStaked && parseFloat((userStaked).toFixed(4))}<span className='text-[12px] ml-2'>$MCC</span></h2>
               </div>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="可質押" id="stake.balance"></FormattedMessage></span>
@@ -226,11 +226,11 @@ const foxStakePage = () => {
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="佔質押池百分比" id="stake.staked.percent"></FormattedMessage></span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{userStaked && allStaking ? Number(((userStaked) / allStaking * 100).toFixed(2)) : 0}%<span className='text-[12px] ml-2'>$MCC</span></h2>
+                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{userStaked && allStaking ? parseFloat(((userStaked) / allStaking * 100).toFixed(2)) : 0}%<span className='text-[12px] ml-2'>$MCC</span></h2>
               </div>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="總質押數" id="stake.totalStaked"></FormattedMessage></span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{allStaking ? allStaking : 0}<span className='text-[12px] ml-2'>$MCC</span></h2>
+                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{allStaking && allStaking}<span className='text-[12px] ml-2'>$MCC</span></h2>
               </div>
               <button onClick={withdrawStake} className='bg-[#AD00FF] rounded-[8px] text-[#fff] font-[400] text-[14px] min-w-[120px] min-h-[45px] py-[9px] px-1 border-t-[1px] border-r-[3px] border-b-[2px] border-l-[1px] border-black'>
                 <FormattedMessage defaultMessage="提取質押中代幣" id="stake.withdrawStaked"></FormattedMessage>
@@ -251,7 +251,7 @@ const foxStakePage = () => {
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="總獎勵" id="stake.totalRewards"></FormattedMessage></span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{stakeRate && userStaked && parseFloat((stakeRate).toFixed(4))}<span className='text-[12px] ml-2'>$MCC</span></h2>
+                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{stakeRate}<span className='text-[12px] ml-2'>$MCC</span></h2>
               </div>
             </div>
           </div>

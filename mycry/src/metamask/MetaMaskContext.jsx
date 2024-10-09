@@ -214,8 +214,8 @@ export const MyMetaMaskProvider = ({ children }) => {
       const finalBalance = web3.utils.fromWei(balance,'ether');
       const contractBalanceData = () =>{
         let uStaked = finalBalance - web3.utils.fromWei(balanceOf,'ether');
-        console.log('a',rate-(finalBalance - web3.utils.fromWei(balanceOf,'ether')))
-        setStakeRate(rate-uStaked);
+        // console.log('a',rate-(finalBalance - web3.utils.fromWei(balanceOf,'ether')))
+        setStakeRate(rate && rate-uStaked);
         setUserNowBalance(parseFloat(web3.utils.fromWei(balanceOf,'ether'))); 
         setUserTotalBalance(finalBalance);
         setUserStaked(uStaked)
