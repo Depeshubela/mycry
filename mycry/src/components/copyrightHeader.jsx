@@ -32,9 +32,9 @@ const copyrightHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
                 <div className="flex items-center w-[30%] gap-2">
                     <div to={ROUTES.MCC_FOX_MAIN} className="flex items-center w-full">
                         <img className='w-full h-[39px]' src='/icon/mycry/mycryCrypto.png' ></img></div>
-                    <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full">
+                    <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full whitespace-nowrap">
                             <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="小狐狸模式" id="header_fox_mode"></FormattedMessage></p></Link>
-                    <Link to={ROUTES.MCC_BACK_MAIN} className="flex w-1/2 text-center h-full">
+                    <Link to={ROUTES.MCC_BACK_MAIN} className="flex w-1/2 text-center h-full whitespace-nowrap">
                         <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="會員模式" id="header_member_mode"></FormattedMessage></p></Link>
                 </div>
                 <div className="flex items-center gap-2">

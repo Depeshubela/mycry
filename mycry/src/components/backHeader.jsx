@@ -74,9 +74,9 @@ const BackHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
                         <img className='w-full h-[39px]' src='/icon/mycry/mycryCrypto.png' ></img></Link>
                     <Link to={ROUTES.MCC_BACK_STAKE} className="flex w-1/2 text-center h-full">
                             <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="質押" id="header_stake"></FormattedMessage></p></Link>
-                    <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full">
+                    <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full whitespace-nowrap">
                         <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="小狐狸模式" id="header_fox_mode"></FormattedMessage></p></Link>
-                    <Link to={ROUTES.MCC_COPYRIGHT} className="flex w-1/2 text-center h-full">
+                    <Link to={ROUTES.MCC_COPYRIGHT} className="flex w-1/2 text-center h-full whitespace-nowrap">
                         <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="版權聲明" id="header_copyright"></FormattedMessage></p></Link>
                 </div>
                 <div className="flex items-center gap-2 w-[25%]">
