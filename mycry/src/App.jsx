@@ -23,13 +23,15 @@ import CopyrightHeader from "./components/copyrightHeader";
 const FoxRoutes = ({ setHeaderHeight, setLocale }) => {
   return (
     <MetaMaskProvider
-      debug={true}
+      debug={false}
       sdkOptions={{
           dappMetadata: {
-          name: "Example React Dapp",
+          name: "MyCry Dapp",
           url: window.location.protocol + '//' + window.location.host,
           },
           infuraAPIKey: "02c5f02b1ca74885874d8bb3455e99c1",
+          
+          // checkInstallationImmediately:true //啟用則在進入頁面時未安裝小狐狸會跳出提示讓安裝
     }}
     >
       <MyMetaMaskProvider>

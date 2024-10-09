@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import {APIContext} from "../backend/APIContext";
 import AuthContext from './auth/authContext';
 import { useIntl } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 
 const BackHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
     if (!showHeader) return null;
@@ -70,13 +71,13 @@ const BackHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
             <div className='container w-[1270px] mx-auto flex justify-between p-2 '>
                 <div className="flex items-center w-[40%] gap-2">
                     <Link to={ROUTES.MCC_BACK_MAIN} className="flex items-center w-full">
-                        <img className='w-full h-[50px]' src='/icon/mycry/mycryCrypto.png' ></img></Link>
+                        <img className='w-full h-[39px]' src='/icon/mycry/mycryCrypto.png' ></img></Link>
                     <Link to={ROUTES.MCC_BACK_STAKE} className="flex w-1/2 text-center h-full">
-                            <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>質押</p></Link>
+                            <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="質押" id="header_stake"></FormattedMessage></p></Link>
                     <Link to={ROUTES.MCC_FOX_MAIN} className="flex w-1/2 text-center h-full">
-                        <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>小狐狸模式</p></Link>
+                        <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="小狐狸模式" id="header_fox_mode"></FormattedMessage></p></Link>
                     <Link to={ROUTES.MCC_COPYRIGHT} className="flex w-1/2 text-center h-full">
-                        <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'>版權聲明</p></Link>
+                        <p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full'><FormattedMessage defaultMessage="版權聲明" id="header_copyright"></FormattedMessage></p></Link>
                 </div>
                 <div className="flex items-center gap-2 w-[25%]">
                     <button onClick={copyToClipboard} title={intl.formatMessage({ id: 'button.title.copy', defaultMessage: '點擊以複製地址' })} className='p-1 border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black h-full'>{hideAddress}</button>
@@ -90,7 +91,7 @@ const BackHeader = ({ showHeader,setHeaderHeight ,setLocale}) => {
                         <option value="zh-TW">繁體中文</option>
                         <option value="jp">日本語</option>
                     </select>
-                    {user && <Link onClick={handleLogout} className='flex w-1/2 text-center h-full'><p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full h-full'>登出</p></Link>}
+                    {user && <Link onClick={handleLogout} className='flex w-1/2 text-center h-full'><p className='flex items-center justify-center border-t border-l border-r-[3px] border-b-2 rounded-lg bg-[#ad00ff] text-white border-solid border-black font-black text-center outline-none w-full h-full'><FormattedMessage defaultMessage="登出" id="header_logout"></FormattedMessage></p></Link>}
                 </div>
             </div>
         </div>

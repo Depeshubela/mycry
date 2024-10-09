@@ -8,7 +8,7 @@ import { setCookie, getCookie, removeCookie } from '../components/setcookie';
 export const MetaMaskContext = createContext();
 export const MyMetaMaskProvider = ({ children }) => {
   
-  const { sdk,  connecting, provider, chainId } = useSDK();
+  const { sdk,  connecting, provider, chainId} = useSDK();
   const [account, setAccount] = useState();
   const [connected, setConnected] = useState();
   const [hideAddress,setHideAddress] = useState('0');
@@ -29,44 +29,45 @@ export const MyMetaMaskProvider = ({ children }) => {
   const usdtcontractABI = USDT_ABI;
   const usdtcontractAddress = "0x0f5d5521e0dFA45778973a077433F1331c0F9390";
 
-  //檢查小狐狸是否已加入arbi sepolia鏈並切換過去
-  useEffect(()=>{
-    const switchEthereumChain = async () => {
-      try {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x66eee' }],
-        });
-      } catch (e) {
-        if (e.code == 4902) {
-          try {
-            await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
-              params: [
-                {
-                  chainId: '0x66eee',
-                  chainName: 'Arbitrum Sepolia',
-                  nativeCurrency: {
-                    name: 'Arbitrum Sepolia',
-                    symbol: 'ETH',
-                    decimals: 18
-                  },
-                  blockExplorerUrls: ['https://sepolia.arbiscan.io'],
-                  rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+  const switchEthereumChain = async () => {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x66eee' }],
+      });
+      
+    } catch (e) {
+      if (e.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: '0x66eee',
+                chainName: 'Arbitrum Sepolia',
+                nativeCurrency: {
+                  name: 'Arbitrum Sepolia',
+                  symbol: 'ETH',
+                  decimals: 18,
                 },
-              ],
-            });
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x66eee' }],
-            });
-
-          } catch (addError) {
-            console.error('no.4902:',addError);
-          }
+                blockExplorerUrls: ['https://sepolia.arbiscan.io'],
+                rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+              },
+            ],
+          });
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x66eee' }],
+          })
+        } catch (addError) {
+          console.error('no.4902:', addError);
         }
+      }else{
       }
     }
+  };
+  //檢查小狐狸是否已加入arbi sepolia鏈並切換過去
+  useEffect(()=>{
     switchEthereumChain()
   },[])
 
@@ -107,6 +108,7 @@ export const MyMetaMaskProvider = ({ children }) => {
 
   //若已連接成功，且沒有餅乾則存進並初始化各種值
   useEffect(() => {
+
     if (account && connected && web3 && contract && chainId) {
       if (!getCookie('userAddress')) {
         setCookie('userAddress', account, 0.5);
@@ -114,19 +116,33 @@ export const MyMetaMaskProvider = ({ children }) => {
       getContractBalance();
       getMainBalance();
     }
+    if(!connected && !connecting){
+      // disconnect()
+      
+    }
     if (parseFloat(userETHBalance) > 0.015) {
       setErrorLog(null);
     }
+    if(provider){
+      provider.on('accountsChanged', function () {
+        if(connected){
+          disconnect()
+        }else{
+          connect()
+        }
+        
+      })
+    }
+    
   }, [account, connected, web3, contract,chainId]);
 
   //小狐狸連接
   const connect = async () => {
     try {
-        // console.log(connected)
       const accounts = await sdk?.connect();
       setAccount(accounts?.[0]);
       setConnected(true)
-      
+      switchEthereumChain()
     } catch (err) {
       console.warn("failed to connect..", err);
     }
@@ -139,6 +155,8 @@ export const MyMetaMaskProvider = ({ children }) => {
       removeCookie('userAddress')
       setAccount(accounts?.[0]);
       setConnected(false)
+      setUserTotalBalance(0)
+      setUserNowBalance(0)
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
@@ -194,7 +212,7 @@ export const MyMetaMaskProvider = ({ children }) => {
       }
       contractBalanceData()
     } catch (error) {
-        console.error("User denied account access");
+        // console.error("User denied account access");
     }
   }
 
