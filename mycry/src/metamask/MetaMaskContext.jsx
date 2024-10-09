@@ -204,7 +204,7 @@ export const MyMetaMaskProvider = ({ children }) => {
         if (element[1] != 0) {
           try {
             const result = await contract.methods.stakingCalculate(element[0], element[1]).call();
-            rate += parseFloat(web3.utils.fromWei(result,'ether'))
+            rate += parseFloat(web3.utils.fromWei(result,'ether')) //rate=質押中+質押獎勵
           } catch (error) {
             console.error("Error calculating rate:", error);
           }
@@ -214,8 +214,7 @@ export const MyMetaMaskProvider = ({ children }) => {
       const finalBalance = web3.utils.fromWei(balance,'ether');
       const contractBalanceData = () =>{
         let uStaked = finalBalance - web3.utils.fromWei(balanceOf,'ether');
-        // console.log('a',rate-(finalBalance - web3.utils.fromWei(balanceOf,'ether')))
-        setStakeRate(rate && rate-uStaked);
+        setStakeRate(parseFloat(rate.toFixed(4)) != parseFloat(uStaked.toFixed(4)) ? rate-uStaked : 0);
         setUserNowBalance(parseFloat(web3.utils.fromWei(balanceOf,'ether'))); 
         setUserTotalBalance(finalBalance);
         setUserStaked(uStaked)
