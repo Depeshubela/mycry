@@ -53,6 +53,11 @@
     "header.copied":"Copied!",
     "button.title.copy":"Click to copy address",
     "copyright.title":"Copyright Notice",
-    "copyright.body":"Some images and page elements in this portfolio are sourced from the internet and are used solely for personal presentation and interview purposes. There is no commercial intent or plan to distribute. I respect the copyrights of all original creators and their works. If any copyright holder has concerns about my use of their content, please contact me, and I will remove the relevant content immediately."
-
+    "copyright.body":"Some images and page elements in this portfolio are sourced from the internet and are used solely for personal presentation and interview purposes. There is no commercial intent or plan to distribute. I respect the copyrights of all original creators and their works. If any copyright holder has concerns about my use of their content, please contact me, and I will remove the relevant content immediately.",
+    "header_fox_mode":"MetaMask Mode",
+    "header_member_mode":"Member Mode",
+    "header_stake":"Stake",
+    "header_copyright":"Copyright",
+    "header_logout":"Sign out",
+    "header_token_buy":"Buy tokens"
 }

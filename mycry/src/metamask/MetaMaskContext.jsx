@@ -62,7 +62,6 @@ export const MyMetaMaskProvider = ({ children }) => {
         } catch (addError) {
           console.error('no.4902:', addError);
         }
-      }else{
       }
     }
   };
@@ -123,17 +122,23 @@ export const MyMetaMaskProvider = ({ children }) => {
     if (parseFloat(userETHBalance) > 0.015) {
       setErrorLog(null);
     }
-    if(provider){
-      provider.on('accountsChanged', function () {
-        if(connected){
-          disconnect()
-        }else{
-          connect()
+    if (provider) {
+      const handleAccountsChanged = async (accounts) => {
+        if (accounts.length === 0) {
+          if (connected) {
+            await disconnect();
+          }
+        } else {
+          if (!connected) {
+            await connect();
+          }
         }
-        
-      })
+      };
+      provider.on('accountsChanged', handleAccountsChanged);
+      return () => {
+        provider.removeListener('accountsChanged', handleAccountsChanged);
+      };
     }
-    
   }, [account, connected, web3, contract,chainId]);
 
   //小狐狸連接
@@ -154,9 +159,12 @@ export const MyMetaMaskProvider = ({ children }) => {
       const accounts = await sdk?.terminate();
       removeCookie('userAddress')
       setAccount(accounts?.[0]);
-      setConnected(false)
+      setConnected(false);
       setUserTotalBalance(0)
       setUserNowBalance(0)
+      setAllStaking(0)
+      setStakeRate(0)
+      setUserStaked(0)
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
@@ -196,7 +204,7 @@ export const MyMetaMaskProvider = ({ children }) => {
         if (element[1] != 0) {
           try {
             const result = await contract.methods.stakingCalculate(element[0], element[1]).call();
-            rate += Number(web3.utils.fromWei(result,'ether'))
+            rate += parseFloat(web3.utils.fromWei(result,'ether'))
           } catch (error) {
             console.error("Error calculating rate:", error);
           }
@@ -205,10 +213,12 @@ export const MyMetaMaskProvider = ({ children }) => {
       }
       const finalBalance = web3.utils.fromWei(balance,'ether');
       const contractBalanceData = () =>{
-        setStakeRate(rate);
-        setUserNowBalance(web3.utils.fromWei(balanceOf,'ether')); 
+        let uStaked = finalBalance - web3.utils.fromWei(balanceOf,'ether');
+        console.log('a',rate-(finalBalance - web3.utils.fromWei(balanceOf,'ether')))
+        setStakeRate(rate-uStaked);
+        setUserNowBalance(parseFloat(web3.utils.fromWei(balanceOf,'ether'))); 
         setUserTotalBalance(finalBalance);
-        setUserStaked((finalBalance - web3.utils.fromWei(balanceOf,'ether')))
+        setUserStaked(uStaked)
       }
       contractBalanceData()
     } catch (error) {

@@ -23,7 +23,7 @@ import CopyrightHeader from "./components/copyrightHeader";
 const FoxRoutes = ({ setHeaderHeight, setLocale }) => {
   return (
     <MetaMaskProvider
-      debug={false}
+      debug={true}
       sdkOptions={{
           dappMetadata: {
           name: "MyCry Dapp",

@@ -9,10 +9,10 @@ export default defineConfig({
   server: {
     host:'0.0.0.0',
     port: 5173,
-    hmr:false //生產環境把熱替換關掉
-    // hmr: {
-      // host: "localhost",
-    // }
+    // hmr:false //生產環境把熱替換關掉
+    hmr: {
+      host: "localhost",
+    }
   },
   build: {
     outDir: 'dist',

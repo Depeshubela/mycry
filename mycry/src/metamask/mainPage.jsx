@@ -32,7 +32,7 @@ const foxMainPage = () => {
     const maxInput = useRef(null);
     const calcDoge = useRef(null);
     const navigate = useNavigate();
-    var targetTimestamp = 1726715681;
+    var targetTimestamp = 1730358000;
     var interval;
 
     useEffect(()=>{

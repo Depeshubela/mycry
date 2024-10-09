@@ -53,8 +53,8 @@ export const APIContextProvider = ({ children }) => {
     useEffect(()=>{
       if(dataLock){
         const setRewardsData = () => {
-          setrateRewards(stakeRate != Number((userStaked).toFixed(4)) ? ((stakeRate / (userStaked) - 1) / 100).toFixed(6) : 0)
-          setTotalRewards(stakeRate != Number((userStaked).toFixed(4)) ? parseFloat((stakeRate - userStaked).toFixed(4)) : 0)
+          setrateRewards(stakeRate && userStaked != '載入中' && parseFloat(((stakeRate / userStaked) * 100).toFixed(6)))
+          setTotalRewards(stakeRate)
         }
         setRewardsData()
       }
@@ -63,7 +63,7 @@ export const APIContextProvider = ({ children }) => {
     //更新池占比
     useEffect(()=>{
       if(dataLock){
-        setPoolPersent(allStaking != '載入中' && userStaked ? Number((userStaked / allStaking * 100).toFixed(2)) : 0)
+        setPoolPersent(allStaking != '載入中' && userStaked && parseFloat((userStaked / allStaking * 100).toFixed(2)))
       }
     },[userStaked,allStaking])
 
@@ -114,7 +114,7 @@ export const APIContextProvider = ({ children }) => {
       setUserNowBalance(parseFloat(parseFloat(data['datas']['tokenBalance']).toFixed(6)));
       setUserStaked(parseFloat(parseFloat(data['datas']['staked']).toFixed(6)));
       if(state === 'new'){
-        setStakeRate(parseFloat(parseFloat(data['rate']).toFixed(6)))
+        setStakeRate(parseFloat(parseFloat(data['rate']).toFixed(6) - parseFloat(data['datas']['staked']).toFixed(6)))
         setAllStaking(parseFloat(parseFloat(data['allStaking']).toFixed(6)))
         setDataLock(true)
       }

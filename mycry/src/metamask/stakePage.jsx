@@ -239,7 +239,7 @@ const foxStakePage = () => {
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="預計回報率" id="stake.rateRewards"></FormattedMessage></span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{userStaked && stakeRate != Number((userStaked).toFixed(4)) ? ((stakeRate / (userStaked) - 1) / 100).toFixed(4) : 0}%<span className='text-[12px] ml-2'>$MCC</span></h2>
+                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{userStaked && stakeRate && parseFloat(((stakeRate / userStaked) * 100).toFixed(4))}%<span className='text-[12px] ml-2'>$MCC</span></h2>
               </div>
               <div className='flex flex-col'>
                 <span className='text-[12px]'><img className='h-auto w-auto inline-block' src='/icon/ani-arrow.svg'></img><FormattedMessage defaultMessage="１年內 ２ * 天數 / １８２５%" id="stake.oneYear"></FormattedMessage></span>
@@ -251,7 +251,7 @@ const foxStakePage = () => {
             <div className={classNames('w-full flex p-[13px] flex-col justify-between items-start color-[#f9f5ef] rounded-[10px] border-black bg-[#FFF5E9] m-0')}>
               <div>
                 <span className='mb-1'><FormattedMessage defaultMessage="總獎勵" id="stake.totalRewards"></FormattedMessage></span>
-                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{stakeRate != Number((userStaked).toFixed(4)) && userTotalBalance && userNowBalance ? (stakeRate - (userTotalBalance - userNowBalance)).toFixed(4) : 0}<span className='text-[12px] ml-2'>$MCC</span></h2>
+                <h2 className='my-1 text-[#ad00ff] text-[22px] flex items-start font-[700]'>{stakeRate && userStaked && parseFloat((stakeRate).toFixed(4))}<span className='text-[12px] ml-2'>$MCC</span></h2>
               </div>
             </div>
           </div>
