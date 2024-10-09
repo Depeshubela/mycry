@@ -25,7 +25,7 @@ export const MyMetaMaskProvider = ({ children }) => {
   const [userStaked,setUserStaked] =useState(0);
 
   const contractABI = MCC_ABI;
-  const contractAddress = "0xD83Ad6b2B3Aff6c5fCCB17fa8901E1B5401873d9";
+  const contractAddress = "0x8b44cD4B02903FeDE538b2CF57aF222A53dee1f6";
   const usdtcontractABI = USDT_ABI;
   const usdtcontractAddress = "0x0f5d5521e0dFA45778973a077433F1331c0F9390";
 
