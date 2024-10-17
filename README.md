@@ -81,6 +81,10 @@ AWS EC2 Linux Ubuntu Docker容器
 
 ## 會員模式功能介紹
 
+測試帳號:test@gmail.com
+
+密碼:123456
+
 由於會員模式功能與小狐狸基本一致，故此處僅舉例部分工具及其呈現狀態
 
 * 登入係以`JWT`做身分認證，並會於登入後儲存於前端`localStorage`，在呼叫API時會將JWT Token以`Bearer Header`的方式傳遞後端並做身分驗證
