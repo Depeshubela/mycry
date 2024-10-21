@@ -98,8 +98,8 @@ DATABASES = {
         'ENGINE': "django.db.backends.postgresql",
         'NAME': "mycry",
         'USER': "postgres",
-        'PASSWORD': "joy50923",
-        'HOST': "mycry.cjmus6oeqzeh.ap-northeast-1.rds.amazonaws.com",
+        'PASSWORD': "*",
+        'HOST': "*",
         'PORT': "5432",
     },
 }
@@ -149,7 +149,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:5173",
 #     "http://localhost",
 #     "http://127.0.0.1",
-#     "http://192.168.100.129.5173",
 # ]
 
 CORS_ALLOW_HEADERS = [
